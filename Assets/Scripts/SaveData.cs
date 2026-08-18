@@ -1,0 +1,183 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using UnityEngine;
+
+public class SaveData
+{
+    public SaveData()
+    {
+        buffer = new List<byte>();
+        offset = 0;
+    }
+    public void Write(ICollection<byte> bytes)
+{
+    buffer.AddRange(bytes);
+}
+    public void Write<T>(T value) where T : unmanaged
+{
+    Span<T> span = stackalloc T[] { value };
+    Write(MemoryMarshal.AsBytes(span).ToArray());
+}
+
+    public void Write(string value)
+	{
+        var tmp = Encoding.UTF8.GetBytes(value);
+        this.Write(tmp.Length);
+        this.Write(tmp);
+	}
+    public void Write(Vector2 value)
+    {
+        this.Write(value.x);
+        this.Write(value.y);
+    }
+    public void WriteIList<T>(IList<T> l, Action<T> writer)
+    {
+        Write(l.Count);
+        for (int i = 0; i < l.Count; i++)writer(l[i]);
+    }
+    public void WriteList<T>(List<T> list, Action<T> writer)
+{
+    Write(list.Count);
+    for (int i = 0; i < list.Count; i++)writer(list[i]);
+}
+public void WriteArray<T>(T[] array, Action<T> writer)
+{
+    Write(array.Length);
+    for (int i = 0; i < array.Length; i++)writer(array[i]);
+}
+public void WriteDic<K,V>(Dictionary<K,V>dic, Action<K> w1, Action<V> w2)
+    {
+        Write(dic.Count);
+        foreach(var pair in dic)
+        {
+            w1(pair.Key);
+            w2(pair.Value);
+            
+        }
+    }
+public bool ReadBool()
+    {
+        var result = BitConverter.ToBoolean(data,offset);
+        offset += sizeof(bool);
+        return result;
+    }
+    public byte ReadByte()
+    {
+        var result = data[offset];
+        offset += 1;
+        return result;
+    }
+public short ReadShort()
+    {
+        var result = BitConverter.ToInt16(data,offset);
+        offset += sizeof(short);
+        return result;
+    }
+public int ReadInt()
+    {
+        var result = BitConverter.ToInt32(data,offset);
+        offset += sizeof(int);
+        return result;
+    }
+    public long ReadLong()
+    {
+        var result = BitConverter.ToInt64(data,offset);
+        offset += sizeof(long);
+        return result;
+    }
+    public ulong ReadULong()
+    {
+        var result = BitConverter.ToUInt64(data,offset);
+        offset += sizeof(long);
+        return result;
+    }
+    public float ReadFloat()
+    {
+        var result = BitConverter.ToSingle(data,offset);
+        offset += sizeof(float);
+        return (float)result;
+    }
+    public double ReadDouble()
+    {
+        var result = BitConverter.ToDouble(data,offset);
+        offset += sizeof(double);
+        return result;
+    }
+    public Vector2 ReadVector2()
+    {
+        return new Vector2(this,this);
+    }
+    public string ReadString()
+	{
+            int num = this;
+            var result = Encoding.UTF8.GetString(data, offset, num);
+            offset += num;
+			return result;
+	}
+    public List<T> ReadList<T>(Func<T> reader)
+    {
+        List<T> list = new List<T>();
+		int count = this;
+		for(int i = 0; i < count;i++)
+        {
+			T value = reader();
+			list.Add(value);
+        }
+		return list;
+    }
+    public T[] ReadArray<T>(Func<T> reader)
+    {
+        int length = this;
+        T[] array = new T[length];
+        for(int i = 0 ; i<length; i++)
+        {
+            array[i] = reader();
+        }
+        return array;
+    }
+    public Dictionary<K,V> ReadDic<K,V>(Func<K> r1, Func<V> r2)
+    {
+        Dictionary<K,V> dic = new Dictionary<K, V>();
+        int count = this;
+        for(int i = 0; i < count;i++)
+        {
+            dic[r1()] = r2();
+        }
+        return dic;
+    }
+public void Save()
+    {
+        data = buffer.ToArray();
+        buffer.Clear();
+        offset = 0;
+    }
+    public static implicit operator bool(SaveData p) => p.ReadBool();
+    public static implicit operator byte(SaveData p) => p.ReadByte();
+    public static implicit operator short(SaveData p) => p.ReadShort();
+    public static implicit operator int(SaveData p) => p.ReadInt();
+    public static implicit operator long(SaveData p) => p.ReadLong();
+    public static implicit operator ulong(SaveData p) => p.ReadULong();
+    public static implicit operator float(SaveData p) => p.ReadFloat();
+    public static implicit operator double(SaveData p) => p.ReadDouble();
+    public static implicit operator string(SaveData p) => p.ReadString();
+    public static implicit operator Vector2(SaveData p) => p.ReadVector2();
+
+    public static implicit operator List<bool>(SaveData p) => p.ReadList(p.ReadBool);
+    public static implicit operator List<short>(SaveData p) => p.ReadList(p.ReadShort);
+    public static implicit operator List<int>(SaveData p) => p.ReadList(p.ReadInt);
+    public static implicit operator List<long>(SaveData p) => p.ReadList(p.ReadLong);
+    public static implicit operator List<float>(SaveData p) => p.ReadList(p.ReadFloat);
+    public static implicit operator List<double>(SaveData p) => p.ReadList(p.ReadDouble);
+    public static implicit operator List<string>(SaveData p) => p.ReadList(p.ReadString);
+    public static implicit operator Vector2[](SaveData p) => p.ReadArray(p.ReadVector2);
+    public static implicit operator Dictionary<int,int>(SaveData p) => p.ReadDic<int,int>(p.ReadInt,p.ReadInt);
+    public static implicit operator Dictionary<int,string>(SaveData p) => p.ReadDic<int,string>(p.ReadInt,p.ReadString);
+    public static implicit operator Dictionary<string,int>(SaveData p) => p.ReadDic<string,int>(p.ReadString,p.ReadInt);
+    public static implicit operator Dictionary<string,string>(SaveData p) => p.ReadDic<string,string>(p.ReadString,p.ReadString);
+    public List<byte> buffer;
+    public byte[] data;
+    public int offset;
+}

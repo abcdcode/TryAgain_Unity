@@ -12,62 +12,41 @@ public struct tInputInfo
     public Vector2 MoveDir;    // 이동 방향 (아날로그 크기 유지, 최대 1)
     public Vector2 ScreenPos;  // 포인터 스크린 좌표
     public Vector2 Delta;      // 포인터 이동량
-    public bool OnSpace;       // 스페이스 눌림 상태
+    public bool OnAttack; // 공격키 눌림 상태
     public bool OnLButton;     // 좌클릭 눌림 상태
 }
 
-public class InputManager : MonoBehaviour
+public class InputManager : SingletonBehavior<InputManager>
 {
-    public static InputManager m_Instance { get; private set; }
 
     [SerializeField] private List<InputActionReference> m_MoveAction;
-    [SerializeField] private List<InputActionReference> m_ScreenAction;
-    [SerializeField] private List<InputActionReference> m_DeltaAction;
-    [SerializeField] private List<InputActionReference> m_SpaceAction;
+    [SerializeField] private List<InputActionReference> m_AttackAction;
 
     private tInputInfo m_tInputInfo;
     public tInputInfo InputInfo => m_tInputInfo;
 
-    public event Action OnSpaceDown;
-    public event Action OnClickDown;
 
     private void Awake()
     {
-        if (m_Instance != null && m_Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        m_Instance = this;
+        base.Awake();
         DontDestroyOnLoad(gameObject);
 
         EnableAll(m_MoveAction);
-        EnableAll(m_ScreenAction);
-        EnableAll(m_DeltaAction);
-        EnableAll(m_SpaceAction);
+        EnableAll(m_AttackAction);
 
-        // 버튼류는 이벤트 콜백으로
-        Subscribe(m_SpaceAction, ctx => OnSpaceDown?.Invoke());
     }
 
     private void OnDestroy()
     {
-        // 이 오브젝트가 실제 인스턴스일 때만 정리
-        if (m_Instance != this)
-            return;
 
         DisableAll(m_MoveAction);
-        DisableAll(m_ScreenAction);
-        DisableAll(m_DeltaAction);
-        DisableAll(m_SpaceAction);
+        DisableAll(m_AttackAction);
     }
 
     private void Update()
     {
         m_tInputInfo.MoveDir = ReadMove();
-        m_tInputInfo.ScreenPos = ReadVector2(m_ScreenAction);
-        m_tInputInfo.Delta = ReadVector2(m_DeltaAction);
-        m_tInputInfo.OnSpace = ReadIsPressed(m_SpaceAction);
+        m_tInputInfo.OnAttack = ReadIsPressed(m_AttackAction);
 
 
     }

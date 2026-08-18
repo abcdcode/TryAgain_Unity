@@ -7,13 +7,14 @@ public abstract class ReplayMono : MonoBehaviour, IReplayObj, ICoolOwner
 {
     public int IndexId {get;set;}
     public string ObjId {get;set;}
-    public void Awake()
+    public virtual void Awake()
     {
         m_CoolTimer = new CoolTimer(this);
     }
 
     public virtual void GameUpdate()
     {
+        m_CoolTimer.GameUpdate();
     }
 
     public virtual void Load(SaveData data)

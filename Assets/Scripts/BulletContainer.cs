@@ -22,6 +22,7 @@ public class BulletContainer : ReplayObjContainer<Bullet>
         {
             b.IndexId = GetNextId();
         }
+        Items.Add(b);
         return b;
     }
     [SerializeField]private GameObject m_BulletPrefab;

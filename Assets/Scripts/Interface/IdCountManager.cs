@@ -4,7 +4,6 @@ public class IdCountManager : SingletonBehavior<IdCountManager>, IReplayable
     {
         return id++;
     }
-
     public void Save(SaveData data)
     {
         data.Write(id);

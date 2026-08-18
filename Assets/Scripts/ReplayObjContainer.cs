@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContainer<T>>, IReplayable where T : IReplayObj
 {
@@ -55,7 +56,7 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
     public abstract T Create(string id, bool isIdCounting);
     public virtual void GameUpdate()
     {
-        Items.ForEach(x => x.GameUpdate());
+        Items.ToList().ForEach(x => x.GameUpdate());
     }
     protected int GetNextId()
     {

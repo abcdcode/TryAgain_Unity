@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class BulletSO : SOData
 {
-    public SpriteSO m_sprite;
+    public SpriteSO m_spriteSO;
     public virtual void Init(Bullet bullet)
     {
         

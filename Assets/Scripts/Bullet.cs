@@ -1,8 +1,17 @@
+using UnityEngine;
+
 public class Bullet : ReplayMono
 {
+    public override void Awake()
+    {
+        base.Awake();
+        renderer = GetComponent<SpriteRenderer>();
+    }
     public void Init(BulletSO d)
     {
         m_Data = d;
+        renderer.sprite = m_Data.m_spriteSO.m_Sprite;
+        m_Data.Init(this);
     }
     public override void Save(SaveData data)
     {
@@ -23,6 +32,7 @@ public class Bullet : ReplayMono
     }
     public override void ExecuteCool(int id)
     {
+        Debug.Log($"Bullet ExecuteCool : {id}");
         BulletCoolEnum e = (BulletCoolEnum)id;
         if(e == BulletCoolEnum.Destroy)
         {
@@ -30,6 +40,7 @@ public class Bullet : ReplayMono
             return;
         }
     }
+    private SpriteRenderer renderer;
     public BulletSO m_Data;
 }
 public enum BulletCoolEnum

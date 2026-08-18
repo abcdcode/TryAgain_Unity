@@ -1,6 +1,22 @@
 using UnityEngine;
 
-public class BulletSO : SOData
+public abstract class BulletSO : SOData
 {
-    public GameObject m_Prefab;
+    public Sprite m_sprite;
+    public virtual void Init(Bullet bullet)
+    {
+        
+    }
+    public virtual void Save(SaveData data, Bullet bullet)
+    {
+        
+    }
+    public virtual void Load(SaveData data, Bullet bullet)
+    {
+        
+    }
+    public virtual void GameUpdate(Bullet bullet)
+    {
+        
+    }
 }

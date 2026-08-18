@@ -15,11 +15,9 @@ public class BulletContainer : ReplayObjContainer<Bullet>
     public override Bullet Create(string id, bool isIdCounting)
     {
         var data = BulletDB.Instance.GetData(id);
-        if(data.m_Prefab == null)
-        {
-            Bullet b = Instantiate(m_BulletPrefab).GetComponent<Bullet>();
-        }
-        return null;
+        Bullet b = Instantiate(m_BulletPrefab).GetComponent<Bullet>();
+        b.Init(data);
+        return b;
     }
     [SerializeField]private GameObject m_BulletPrefab;
 }

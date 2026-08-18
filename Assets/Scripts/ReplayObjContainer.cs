@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContainer<T>> where T : IReplayObj
+public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContainer<T>>, IReplayable where T : IReplayObj
 {
     public virtual void Save(SaveData data)
     {
@@ -57,5 +57,5 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
     {
         Items.ForEach(x => x.GameUpdate());
     }
-    protected List<T> Items;
+    protected List<T> Items = new List<T>();
 }

@@ -3,10 +3,14 @@ using UnityEngine;
 /// 저장 핵심 오브젝트.
 /// 해당 오브젝트의 컴포넌트 중 ChildReplayMono
 /// </summary>
-public abstract class ReplayMono : MonoBehaviour, IReplayObj
+public abstract class ReplayMono : MonoBehaviour, IReplayObj, ICoolOwner
 {
     public int IndexId {get;set;}
     public string ObjId {get;set;}
+    public void Awake()
+    {
+        m_CoolTimer = new CoolTimer(this);
+    }
 
     public virtual void GameUpdate()
     {
@@ -16,14 +20,22 @@ public abstract class ReplayMono : MonoBehaviour, IReplayObj
     {
         LocalPosition = data;
         Angle = data;
+        m_CoolTimer.Load(data);
     }
 
     public virtual void Save(SaveData data)
     {
         data.Write(LocalPosition);
         data.Write(Angle);
+        m_CoolTimer.Save(data);
     }
     public abstract void Delete();
+
+    public virtual void ExecuteCool(int id)
+    {
+    }
+    public CoolTimer m_CoolTimer;
+
     public Vector2 Position
     {
         get

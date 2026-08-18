@@ -17,6 +17,17 @@ public abstract class DataDB<T> : SingletonBehavior<DataDB<T>> where T : SOData
             id++;
         }
     }
+    public virtual int GetId(T data)
+    {
+        foreach(var pair in itemDic)
+        {
+            if(pair.Value == data)
+            {
+                return pair.Key;
+            }
+        }
+        return -1;
+    }
     public virtual T GetData(string id)
     {
         return GetData(idDic.Get(id));

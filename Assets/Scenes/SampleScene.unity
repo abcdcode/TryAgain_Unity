@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 1710443393}
   - component: {fileID: 1710443392}
   - component: {fileID: 1710443394}
+  - component: {fileID: 1710443395}
   m_Layer: 0
   m_Name: ManagerContainer
   m_TagString: Untagged
@@ -415,6 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f303b247222de144d89a1f912eba504b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  m_playerPrefab: {fileID: 3716359474922246344, guid: 5047a34e4ddab244c83c699245036f5f, type: 3}
   Containers:
   - {fileID: 1710443394}
 --- !u!4 &1710443393
@@ -445,6 +447,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletContainer
   m_BulletPrefab: {fileID: 0}
+--- !u!114 &1710443395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710443391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d976d3aab9fb147a9ba7e454f7343a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputManager
+  m_MoveAction:
+  - {fileID: 8468040874900578005, guid: 62a3f5063363c0f40bc59c949d78de4b, type: 3}
+  m_ScreenAction: []
+  m_DeltaAction: []
+  m_SpaceAction: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

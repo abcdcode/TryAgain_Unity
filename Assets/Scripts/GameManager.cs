@@ -14,15 +14,20 @@ public class GameManager : SingletonBehavior<GameManager>
                 m_ContainerList.Add(i);
             }
         }
+        CurPlayer = Instantiate(m_playerPrefab).GetComponent<Player>();
+        CurPlayer.Position = new Vector2(0,0);
     }
 
     void Update()
     {
+        CurPlayer.GameUpdate();
         foreach(var c in m_ContainerList)
         {
             c.GameUpdate();
         }
     }
+    public Player CurPlayer{get;private set;}
     private List<IReplayable> m_ContainerList;
+    [SerializeField]private GameObject m_playerPrefab;
     [SerializeField]private List<MonoBehaviour> Containers;
 }

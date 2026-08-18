@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 676c4161181ce4e4987d46baff87e91c, type: 3}
+  m_Name: PlayerDefaultBullet
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteSO
+  m_Id: PlayerDefaultBullet
+  m_Sprite: {fileID: 8140593895237489223, guid: 99690b36c01ad7343a4bce51ad6d19aa, type: 3}

@@ -57,5 +57,9 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
     {
         Items.ForEach(x => x.GameUpdate());
     }
+    protected int GetNextId()
+    {
+        return IdCountManager.Instance.GetNextId();
+    }
     protected List<T> Items = new List<T>();
 }

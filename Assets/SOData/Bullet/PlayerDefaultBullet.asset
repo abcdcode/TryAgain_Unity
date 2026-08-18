@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02adabf69e54e6c4b9d8e628fc29b836, type: 3}
-  m_Name: New BulletSO
-  m_EditorClassIdentifier: Assembly-CSharp::BulletSO
-  m_Id: 
-  m_Prefab: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 1820bf398f7b0b5459cf241ede60fbb9, type: 3}
+  m_Name: PlayerDefaultBullet
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultBulletSO
+  m_Id: PlayerDefaultBullet
+  m_sprite: {fileID: 0}
+  m_time: 0
+  m_speed: 0

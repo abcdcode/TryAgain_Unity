@@ -350,6 +350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1368819177}
   - component: {fileID: 1368819176}
+  - component: {fileID: 1368819178}
   m_Layer: 0
   m_Name: DBContainer
   m_TagString: Untagged
@@ -369,7 +370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87c91e6fce843b24aaedfcfe9102d544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletDB
-  items: []
+  items:
+  - {fileID: 11400000, guid: 3fee23e65817288419a955f0ffa2cca3, type: 2}
 --- !u!4 &1368819177
 Transform:
   m_ObjectHideFlags: 0
@@ -385,6 +387,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1368819178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368819175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39902e9d35ed9c943995eb06b143efc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteDB
+  items:
+  - {fileID: 11400000, guid: 51379d163ae446c4eb7e6c04b578dc49, type: 2}
 --- !u!1 &1710443391
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa4bafbc8ad48747bef3ea9bf4594ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletContainer
-  m_BulletPrefab: {fileID: 0}
+  m_BulletPrefab: {fileID: 6206921571643554147, guid: 866d743507b14db45b4f29feb8d2ede7, type: 3}
 --- !u!114 &1710443395
 MonoBehaviour:
   m_ObjectHideFlags: 0

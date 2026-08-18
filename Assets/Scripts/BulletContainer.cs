@@ -17,6 +17,11 @@ public class BulletContainer : ReplayObjContainer<Bullet>
         var data = BulletDB.Instance.GetData(id);
         Bullet b = Instantiate(m_BulletPrefab).GetComponent<Bullet>();
         b.Init(data);
+        b.ObjId = data.m_Id;
+        if(isIdCounting)
+        {
+            b.IndexId = GetNextId();
+        }
         return b;
     }
     [SerializeField]private GameObject m_BulletPrefab;

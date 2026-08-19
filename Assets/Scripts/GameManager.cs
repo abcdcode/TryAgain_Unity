@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+/// <summary>
+/// 게임 업데이트 총괄 부서
+/// </summary>
 public class GameManager : SingletonBehavior<GameManager>
 {
     void Start()
@@ -18,7 +20,11 @@ public class GameManager : SingletonBehavior<GameManager>
         CurPlayer = Instantiate(m_playerPrefab).GetComponent<Player>();
         CurPlayer.Position = new Vector2(0,0);
         CurFrame = 0;
+        State = GameManagerState.Playing;
     }
+    /// <summary>
+    /// 인풋 받아서 플레이 상태 결정하는 곳
+    /// </summary>
     void StateCheck()
     {
         var inputinfo = InputManager.Instance.InputInfo;
@@ -35,7 +41,6 @@ public class GameManager : SingletonBehavior<GameManager>
         {
             State = GameManagerState.Playing;
         }
-        
     }
     void Update()
     {

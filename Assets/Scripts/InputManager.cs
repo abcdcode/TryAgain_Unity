@@ -12,7 +12,6 @@ public struct tInputInfo
     public Vector2 MoveDir;    // 이동 방향 (아날로그 크기 유지, 최대 1)
     public bool OnAttack; // 공격키 눌림 상태
     public bool OnReplay; // 리플레이 키 눌림 상태
-    
     public bool OnESC; // ESC 키 눌림 상태
     public bool OnESCDown; // 리플레이 키 눌림 상태 - 1프레임
 }
@@ -54,7 +53,7 @@ public class InputManager : SingletonBehavior<InputManager>
         m_tInputInfo.OnAttack = ReadIsPressed(m_AttackAction);
         m_tInputInfo.OnReplay = ReadIsPressed(m_ReplayAction);
         m_tInputInfo.OnESC = ReadIsPressed(m_ESCAction);
-        m_tInputInfo.OnESC = ReadIsDown(m_ESCAction);
+        m_tInputInfo.OnESCDown = ReadIsDown(m_ESCAction);
     }
 
     // 여러 이동 소스 중 크기가 가장 큰 입력을 선택 (덮어쓰기 버그 방지)

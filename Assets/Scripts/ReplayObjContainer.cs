@@ -56,11 +56,15 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
     public abstract T Create(string id, bool isIdCounting);
     public virtual void GameUpdate()
     {
-        Items.ToList().ForEach(x => x.GameUpdate());
+        GetList().ForEach(x => x.GameUpdate());
     }
     protected int GetNextId()
     {
         return IdCountManager.Instance.GetNextId();
+    }
+    public virtual List<T> GetList()
+    {
+        return Items.ToList();
     }
     protected List<T> Items = new List<T>();
 }

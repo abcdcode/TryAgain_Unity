@@ -20,7 +20,6 @@ public class CoolTimer : IReplayable
     /// <param name="cool">쿨타임. ms단위 ex) 1000 = 1초</param>
     /// <param name="startCool">시작 쿨타임</param>
     /// <param name="isOnce">한번 호출 후 사라질 지 여부. 단순 쿨타임 체크용이라면 false 권장</param>
-    /// <param name="callBack">쿨타임 되었을때 콜백 함수</param>
     public void SetCool(int id, float cool, float startCool, bool isOnce)
     {
         CoolInfo info = new (startCool,cool,isOnce);

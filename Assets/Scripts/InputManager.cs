@@ -10,10 +10,11 @@ using UnityEngine.InputSystem;
 public struct tInputInfo
 {
     public Vector2 MoveDir;    // 이동 방향 (아날로그 크기 유지, 최대 1)
-    public Vector2 ScreenPos;  // 포인터 스크린 좌표
-    public Vector2 Delta;      // 포인터 이동량
     public bool OnAttack; // 공격키 눌림 상태
-    public bool OnLButton;     // 좌클릭 눌림 상태
+    public bool OnReplay; // 리플레이 키 눌림 상태
+    
+    public bool OnESC; // ESC 키 눌림 상태
+    public bool OnESCDown; // 리플레이 키 눌림 상태 - 1프레임
 }
 
 public class InputManager : SingletonBehavior<InputManager>
@@ -21,6 +22,8 @@ public class InputManager : SingletonBehavior<InputManager>
 
     [SerializeField] private List<InputActionReference> m_MoveAction;
     [SerializeField] private List<InputActionReference> m_AttackAction;
+    [SerializeField] private List<InputActionReference> m_ReplayAction;
+    [SerializeField] private List<InputActionReference> m_ESCAction;
 
     private tInputInfo m_tInputInfo;
     public tInputInfo InputInfo => m_tInputInfo;
@@ -33,22 +36,25 @@ public class InputManager : SingletonBehavior<InputManager>
 
         EnableAll(m_MoveAction);
         EnableAll(m_AttackAction);
-
+        EnableAll(m_ReplayAction);
+        EnableAll(m_ESCAction);
     }
 
     private void OnDestroy()
     {
-
         DisableAll(m_MoveAction);
         DisableAll(m_AttackAction);
+        DisableAll(m_ReplayAction);
+        DisableAll(m_ESCAction);
     }
 
     private void Update()
     {
         m_tInputInfo.MoveDir = ReadMove();
         m_tInputInfo.OnAttack = ReadIsPressed(m_AttackAction);
-
-
+        m_tInputInfo.OnReplay = ReadIsPressed(m_ReplayAction);
+        m_tInputInfo.OnESC = ReadIsPressed(m_ESCAction);
+        m_tInputInfo.OnESC = ReadIsDown(m_ESCAction);
     }
 
     // 여러 이동 소스 중 크기가 가장 큰 입력을 선택 (덮어쓰기 버그 방지)
@@ -85,7 +91,13 @@ public class InputManager : SingletonBehavior<InputManager>
                 return true;
         return false;
     }
-
+    private bool ReadIsDown(List<InputActionReference> list)
+    {
+        for (int i = 0; i < list.Count; ++i)
+            if (list[i].action.WasPressedThisFrame())
+                return true;
+        return false;
+    }
     private static void EnableAll(List<InputActionReference> list)
     {
         for (int i = 0; i < list.Count; ++i)

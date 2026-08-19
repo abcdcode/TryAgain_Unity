@@ -32,7 +32,7 @@ public class Bullet : ReplayMono
     }
     public override void ExecuteCool(int id)
     {
-        Debug.Log($"Bullet ExecuteCool : {id}");
+        //Debug.Log($"Bullet ExecuteCool : {id}");
         BulletCoolEnum e = (BulletCoolEnum)id;
         if(e == BulletCoolEnum.Destroy)
         {

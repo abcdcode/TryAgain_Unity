@@ -6,12 +6,16 @@ public class DefaultBulletSO : BulletSO
     public override void Init(Bullet bullet)
     {
         base.Init(bullet);
-        Debug.Log("DefaultBulletSO Init");
+        //Debug.Log("DefaultBulletSO Init");
         bullet.m_CoolTimer.SetCool((int)BulletCoolEnum.Destroy,m_time,0,true);
     }
     public override void GameUpdate(Bullet bullet)
     {
         base.GameUpdate(bullet);
         bullet.Position += (Vector2)bullet.transform.right.normalized * m_speed * Time.deltaTime;
+    }
+    public override void ExecuteCool(Bullet bullet, int value)
+    {
+        base.ExecuteCool(bullet,value);
     }
 }

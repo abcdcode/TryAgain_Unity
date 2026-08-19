@@ -21,6 +21,7 @@ public abstract class ReplayMono : MonoBehaviour, IReplayObj, ICoolOwner
     {
         LocalPosition = data;
         Angle = data;
+        Scale = data;
         m_CoolTimer.Load(data);
     }
 
@@ -28,6 +29,7 @@ public abstract class ReplayMono : MonoBehaviour, IReplayObj, ICoolOwner
     {
         data.Write(LocalPosition);
         data.Write(Angle);
+        data.Write(Scale);
         m_CoolTimer.Save(data);
     }
     public abstract void Delete();
@@ -57,6 +59,17 @@ public abstract class ReplayMono : MonoBehaviour, IReplayObj, ICoolOwner
         set
         {
             transform.localPosition = value;
+        }
+    }
+    public Vector2 Scale
+    {
+        get
+        {
+            return transform.localScale;
+        }
+        set
+        {
+            transform.localScale = value;
         }
     }
     /// <summary>

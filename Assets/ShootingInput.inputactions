@@ -101,6 +101,62 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Replay",
+            "id": "92572e59-f0d9-4cb1-a2bb-69690bd42149",
+            "actions": [
+                {
+                    "name": "Replay",
+                    "type": "Button",
+                    "id": "42741978-92f9-4b8e-af3f-e8dfdca2c97a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "58b7b784-818a-469d-bc99-ca85f6f350a4",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Replay",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "ESC",
+            "id": "cb7a9764-a8a5-4734-8544-d307edc3566b",
+            "actions": [
+                {
+                    "name": "ESC",
+                    "type": "Button",
+                    "id": "cd11b1ae-db4f-4cec-a406-02c987bfb080",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5a30200e-0d45-4bf8-a986-2c2b90274651",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ESC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

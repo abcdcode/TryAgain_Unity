@@ -1,7 +1,12 @@
 using UnityEngine;
 
-public class Player : ReplayMono
+public class Player : ReplayMono, IDamageable
 {
+    public FactionEnum Faction => FactionEnum.Player;
+    public void TakeDamage(DamageInfo dmg)
+    {
+        
+    }
     public override void Awake()
     {
         base.Awake();
@@ -32,5 +37,6 @@ public class Player : ReplayMono
     public override void Delete()
     {
     }
+
     
 }

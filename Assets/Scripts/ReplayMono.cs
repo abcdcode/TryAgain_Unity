@@ -3,7 +3,7 @@ using UnityEngine;
 /// 저장 핵심 오브젝트.
 /// 해당 오브젝트의 컴포넌트 중 ChildReplayMono
 /// </summary>
-public abstract class ReplayMono : MonoBehaviour, IReplayObj, ICoolOwner
+public abstract class ReplayMono : GameMono, IReplayObj, ICoolOwner
 {
     public int IndexId {get;set;}
     public string ObjId {get;set;}
@@ -14,7 +14,8 @@ public abstract class ReplayMono : MonoBehaviour, IReplayObj, ICoolOwner
 
     public virtual void GameUpdate()
     {
-        m_CoolTimer.GameUpdate();
+        m_CoolTimer?.GameUpdate();
+        Animator?.GameUpdate();
     }
 
     public virtual void Load(SaveData data)
@@ -22,7 +23,8 @@ public abstract class ReplayMono : MonoBehaviour, IReplayObj, ICoolOwner
         LocalPosition = data;
         Angle = data;
         Scale = data;
-        m_CoolTimer.Load(data);
+        m_CoolTimer?.Load(data);
+        Animator?.Load(data);
     }
 
     public virtual void Save(SaveData data)
@@ -30,60 +32,24 @@ public abstract class ReplayMono : MonoBehaviour, IReplayObj, ICoolOwner
         data.Write(LocalPosition);
         data.Write(Angle);
         data.Write(Scale);
-        m_CoolTimer.Save(data);
+        m_CoolTimer?.Save(data);
+        Animator?.Save(data);
     }
     public abstract void Delete();
 
     public virtual void ExecuteCool(int id)
     {
     }
-    public CoolTimer m_CoolTimer;
+    public virtual void OnDrawGizmos()
+    {
+        if(GameManager.Instance.IsDebug)
+        {
+            Gizmos.DrawSphere(Position,this.GetSize().x/2);
+        }
+    }
+    [SerializeField]private ReplayAnimator m_animator;
+    public ReplayAnimator Animator => m_animator;
+    public CoolTimer m_CoolTimer{get;private set;}
 
-    public Vector2 Position
-    {
-        get
-        {
-            return transform.position;
-        }
-        set
-        {
-            transform.position = value;
-        }
-    }
-    public Vector2 LocalPosition
-    {
-        get
-        {
-            return transform.localPosition;
-        }
-        set
-        {
-            transform.localPosition = value;
-        }
-    }
-    public Vector2 Scale
-    {
-        get
-        {
-            return transform.localScale;
-        }
-        set
-        {
-            transform.localScale = value;
-        }
-    }
-    /// <summary>
-    /// 각도. 0~360. 우측을 0도로 둠
-    /// </summary>
-    public float Angle
-    {
-        get
-        {
-            return transform.eulerAngles.z;
-        }
-        set
-        {
-            transform.eulerAngles = new Vector3(0,0,value);
-        }
-    }
+    
 }

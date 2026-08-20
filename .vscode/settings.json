@@ -67,5 +67,7 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "TryAgain_Unity.slnx"
+    "dotnet.defaultSolution": "TryAgain_Unity.slnx",
+    "csharp2plantuml.inputPath": "Assets/Scripts",
+    "csharp2plantuml.outputPath": "PlantUML",
 }

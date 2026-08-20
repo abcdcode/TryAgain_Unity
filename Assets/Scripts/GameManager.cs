@@ -103,6 +103,7 @@ public class GameManager : SingletonBehavior<GameManager>
     [SerializeField]private GameObject m_playerPrefab;
     [SerializeField]private List<MonoBehaviour> Containers;
     [SerializeField]private TextMeshProUGUI m_DebugText;
+    [SerializeField]public bool IsDebug;
 }
 public enum GameManagerState
 {

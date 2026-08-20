@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 /// <summary>
 /// 전방으로 지속시간동안 일정속도로 나아가는 일반 탄환
 /// </summary>

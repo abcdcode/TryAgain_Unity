@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContainer<T>>, IReplayable where T : IReplayObj
 {
@@ -78,5 +79,5 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
     {
         return Items.ToList();
     }
-    protected List<T> Items = new List<T>();
+    [SerializeField]protected List<T> Items = new List<T>();
 }

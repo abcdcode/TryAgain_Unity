@@ -2,6 +2,7 @@ public interface IDamageable
 {
     public void TakeDamage(DamageInfo dmg);
     public FactionEnum Faction{get;}
+
 }
 public struct DamageInfo
 {

@@ -20,7 +20,7 @@ public abstract class ReplayMono : GameMono, IReplayObj, ICoolOwner
 
     public virtual void Load(SaveData data)
     {
-        LocalPosition = data;
+        Position = data;
         Angle = data;
         Scale = data;
         m_CoolTimer?.Load(data);
@@ -29,7 +29,7 @@ public abstract class ReplayMono : GameMono, IReplayObj, ICoolOwner
 
     public virtual void Save(SaveData data)
     {
-        data.Write(LocalPosition);
+        data.Write(Position);
         data.Write(Angle);
         data.Write(Scale);
         m_CoolTimer?.Save(data);

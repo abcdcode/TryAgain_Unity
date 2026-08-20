@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 /// <summary>
@@ -9,7 +10,8 @@ public class GameManager : SingletonBehavior<GameManager>
     void Start()
     {
         ReplayHamburger.Instance.Reset();
-        m_ContainerList = new List<IReplayable>();
+        m_ContainerList = GetComponents<IReplayable>().ToList();
+        /*
         foreach(var c in Containers)
         {
             if(c is IReplayable i)
@@ -17,8 +19,13 @@ public class GameManager : SingletonBehavior<GameManager>
                 m_ContainerList.Add(i);
             }
         }
+        */
         CurPlayer = Instantiate(m_playerPrefab).GetComponent<Player>();
         CurPlayer.Position = new Vector2(0,0);
+
+        var e = EnemyContainer.Instance.Create("TestEnemy",true);
+        e.Position = new Vector2(600,0);
+        e.SetSize(new Vector2(100,100));
         CurFrame = 0;
         State = GameManagerState.Playing;
     }
@@ -101,7 +108,6 @@ public class GameManager : SingletonBehavior<GameManager>
     public int CurFrame{get;private set;}
     private List<IReplayable> m_ContainerList;
     [SerializeField]private GameObject m_playerPrefab;
-    [SerializeField]private List<MonoBehaviour> Containers;
     [SerializeField]private TextMeshProUGUI m_DebugText;
     [SerializeField]public bool IsDebug;
 }

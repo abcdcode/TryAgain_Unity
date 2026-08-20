@@ -590,6 +590,7 @@ GameObject:
   - component: {fileID: 1368819177}
   - component: {fileID: 1368819176}
   - component: {fileID: 1368819178}
+  - component: {fileID: 1368819179}
   m_Layer: 0
   m_Name: DBContainer
   m_TagString: Untagged
@@ -640,6 +641,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteDB
   items:
   - {fileID: 11400000, guid: 51379d163ae446c4eb7e6c04b578dc49, type: 2}
+--- !u!114 &1368819179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368819175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d992cbaf781ec34d8973b09e2fdbc70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDB
+  items:
+  - {fileID: 11400000, guid: f3f72c56e6c82f340b743095ae61f681, type: 2}
 --- !u!1 &1706168592
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,6 +746,7 @@ GameObject:
   - component: {fileID: 1710443392}
   - component: {fileID: 1710443394}
   - component: {fileID: 1710443396}
+  - component: {fileID: 1710443397}
   - component: {fileID: 1710443395}
   m_Layer: 0
   m_Name: ManagerContainer
@@ -752,10 +768,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   m_playerPrefab: {fileID: 3716359474922246344, guid: 5047a34e4ddab244c83c699245036f5f, type: 3}
-  Containers:
-  - {fileID: 1710443394}
-  - {fileID: 1710443396}
   m_DebugText: {fileID: 1058458395}
+  IsDebug: 0
 --- !u!4 &1710443393
 Transform:
   m_ObjectHideFlags: 0
@@ -783,6 +797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa4bafbc8ad48747bef3ea9bf4594ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletContainer
+  Items: []
   m_BulletPrefab: {fileID: 6206921571643554147, guid: 866d743507b14db45b4f29feb8d2ede7, type: 3}
 --- !u!114 &1710443395
 MonoBehaviour:
@@ -816,6 +831,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0688cdd2d440c394590bf1b933d0343f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IdCountManager
+--- !u!114 &1710443397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710443391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb52f7dc30097864880c08b97e886588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyContainer
+  Items: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

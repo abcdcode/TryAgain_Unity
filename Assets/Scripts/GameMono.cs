@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameMono : MonoBehaviour
 {
-    public Vector2 Position
+    public virtual Vector2 Position
     {
         get
         {
@@ -13,18 +13,7 @@ public class GameMono : MonoBehaviour
             transform.position = value;
         }
     }
-    public Vector2 LocalPosition
-    {
-        get
-        {
-            return transform.localPosition;
-        }
-        set
-        {
-            transform.localPosition = value;
-        }
-    }
-    public Vector2 Scale
+    public virtual Vector2 Scale
     {
         get
         {
@@ -38,7 +27,7 @@ public class GameMono : MonoBehaviour
     /// <summary>
     /// 각도. 0~360. 우측을 0도로 둠
     /// </summary>
-    public float Angle
+    public virtual float Angle
     {
         get
         {

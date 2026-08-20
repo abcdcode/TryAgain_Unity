@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public class Player : ReplayMono, IDamageable
+public class Player : ReplayMono, IHitable
 {
     public FactionEnum Faction => FactionEnum.Player;
+
+    public float HitSize => this.GetSize().x;
+
     public void TakeDamage(DamageInfo dmg)
     {
         
@@ -30,9 +33,10 @@ public class Player : ReplayMono, IDamageable
     public void Shoot()
     {
         var b = BulletContainer.Instance.Create(BulletDB.PlayerDefaultBullet,true);
-        b.Position = this.Position;
+        b.InitPos(this.Position);
         b.Angle = 0;
         b.SetSize(new Vector2(100,100));
+        b.Faction = FactionEnum.Player;
     }
     public override void Delete()
     {

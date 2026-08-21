@@ -5,7 +5,7 @@ public class Bullet : ReplayMono
 {
     public static bool HitCheck(Bullet b, Vector2 target, float tSize)
     {
-        return CalcUtils.SegmentCircle(b.Position,b.prevPos,target,tSize);
+        return CalcUtils.SegmentCircle(b.Position,b.prevPos,target,tSize+b.GetSize().x/2);
     }
     public override void Awake()
     {

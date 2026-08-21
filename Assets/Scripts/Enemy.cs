@@ -25,7 +25,7 @@ public class Enemy : ReplayMono, IHitable
     public override void GameUpdate()
     {
         base.GameUpdate();
-        BulletContainer.HitCheck(this);
+        BulletContainer.HitCheckNew(this);
         EnemyData?.GameUpdate(this);
         EnemyAIData?.GameUpdate(this);
         
@@ -36,7 +36,7 @@ public class Enemy : ReplayMono, IHitable
     }
     public void TakeDamage(DamageInfo dmg)
     {
-        ReplayDebug.Log("TakeDamage!!!");
+        //ReplayDebug.Log("TakeDamage!!!");
     }
 
     public float HP{get;private set;}

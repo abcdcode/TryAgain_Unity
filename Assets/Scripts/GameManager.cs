@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 /// <summary>
 /// 게임 업데이트 총괄 부서
 /// </summary>
@@ -9,6 +11,7 @@ public class GameManager : SingletonBehavior<GameManager>
 {
     void Start()
     {
+        Application.targetFrameRate = 120;
         ReplayHamburger.Instance.Reset();
         m_ContainerList = GetComponents<IReplayable>().ToList();
         /*
@@ -22,10 +25,12 @@ public class GameManager : SingletonBehavior<GameManager>
         */
         CurPlayer = Instantiate(m_playerPrefab).GetComponent<Player>();
         CurPlayer.Position = new Vector2(0,0);
-
-        var e = EnemyContainer.Instance.Create("TestEnemy",true);
-        e.Position = new Vector2(600,0);
-        e.SetSize(new Vector2(100,100));
+        for(int i = 0 ; i < 100; i++)
+        {
+            var e = EnemyContainer.Instance.Create("TestEnemy",true);
+            e.Position = new Vector2(600,0);
+            e.SetSize(new Vector2(100,100));
+        }
         CurFrame = 0;
         State = GameManagerState.Playing;
     }
@@ -51,6 +56,7 @@ public class GameManager : SingletonBehavior<GameManager>
     }
     void Update()
     {
+        var v = System.DateTime.Now.Millisecond;
         StateCheck();
         if(State == GameManagerState.Playing)
         {
@@ -64,16 +70,28 @@ public class GameManager : SingletonBehavior<GameManager>
         {
             Load();
         }
-        m_DebugText.text = $"Time : {CurFrame}";
+        var v2 = System.DateTime.Now.Millisecond;
+
+        m_DebugText.text = $"Time : {CurFrame} , GameManager Frame Time : {v2 - v} ms , Tick1 {tick1}, Tick2 {tick2}";
     }
+    private long tick1;
+    private long tick2;
     void GameUpdate()
     {
+        Stopwatch sw = Stopwatch.StartNew();
         CurPlayer.GameUpdate();
+        
         foreach(var c in m_ContainerList)
         {
             c.GameUpdate();
         }
+        sw.Stop();
+        tick1 = sw.ElapsedTicks;
+        sw.Reset();
+        sw.Start();
         Save();
+        sw.Stop();
+        tick2 = sw.ElapsedTicks;
         CurFrame += 1;
     }
     void Save()
@@ -110,6 +128,8 @@ public class GameManager : SingletonBehavior<GameManager>
     [SerializeField]private GameObject m_playerPrefab;
     [SerializeField]private TextMeshProUGUI m_DebugText;
     [SerializeField]public bool IsDebug;
+    public const int ScreenX = 1920;
+    public const int ScreenY = 1080;
 }
 public enum GameManagerState
 {

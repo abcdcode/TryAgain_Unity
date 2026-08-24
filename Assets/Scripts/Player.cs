@@ -22,7 +22,7 @@ public class Player : ReplayMono, IHitable
         //방향키 인풋
         var MoveDir = input.MoveDir;
         //이동
-        this.transform.Translate(MoveDir.normalized*1000*Time.deltaTime);
+        this.Position += MoveDir.normalized*1000*Time.deltaTime;
         this.Position = CalcUtils.ScreenClamp(this.Position,this.GetSize());
         var isAtk = input.OnAttack;
         if(isAtk)

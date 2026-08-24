@@ -96,6 +96,7 @@ public class GameManager : SingletonBehavior<GameManager>
     }
     void Save()
     {
+        /*
         SaveData data = new SaveData();
         CurPlayer.Save(data);
         foreach(var c in m_ContainerList)
@@ -104,6 +105,7 @@ public class GameManager : SingletonBehavior<GameManager>
         }
         data.Save();
         ReplayHamburger.Instance.Save(CurFrame,data);
+        */
     }
     void Load()
     {

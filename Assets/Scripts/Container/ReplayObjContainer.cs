@@ -47,18 +47,10 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
     public virtual void Add(T t)
     {
         Items.Add(t);
-        if(t is ICollision c)
-        {
-            CollisionManager.Instance.RegisterCol(c);
-        }
     }
     public virtual void Delete(T t)
     {
         Items.Remove(t);
-        if(t is ICollision c)
-        {
-            CollisionManager.Instance.UnRegisterCol(c);
-        }
         if(t is ReplayMono mono)
         {
             Destroy(mono.gameObject);

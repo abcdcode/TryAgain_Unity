@@ -10,10 +10,12 @@ public abstract class ReplayMono : GameMono, IReplayObj, ICoolOwner
     public virtual void Awake()
     {
         m_CoolTimer = new CoolTimer(this);
+        m_rederer = GetComponent<SpriteRenderer>();
     }
 
-    public virtual void GameUpdate()
+    public override void GameUpdate()
     {
+        base.GameUpdate();
         m_CoolTimer?.GameUpdate();
         Animator?.GameUpdate();
     }
@@ -42,11 +44,13 @@ public abstract class ReplayMono : GameMono, IReplayObj, ICoolOwner
     }
     public virtual void OnDrawGizmos()
     {
+        if(GameManager.Instance == null) return;
         if(GameManager.Instance.IsDebug)
         {
             Gizmos.DrawSphere(Position,this.GetSize().x/2);
         }
     }
+    public SpriteRenderer m_rederer;
     [SerializeField]private ReplayAnimator m_animator;
     public ReplayAnimator Animator => m_animator;
     public CoolTimer m_CoolTimer{get;private set;}

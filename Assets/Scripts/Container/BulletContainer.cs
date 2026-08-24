@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework.Interfaces;
 using UnityEngine;
 
 public class BulletContainer : ReplayObjContainer<Bullet>
@@ -23,12 +24,14 @@ public class BulletContainer : ReplayObjContainer<Bullet>
         if(a.Obj == null) return;
         var cX = GameManager.ScreenX/CellCount;
         var cY = GameManager.ScreenY/CellCount;
-        int YY = (int)(a.Obj.Position.y+GameManager.ScreenY/2)/cY;
-        int XX = (int)(a.Obj.Position.x+GameManager.ScreenX/2)/cX;
+        var aPos = a.Obj.Position;
+        int YY = (int)(aPos.y+GameManager.ScreenY/2)/cY;
+        int XX = (int)(aPos.x+GameManager.ScreenX/2)/cX;
         foreach(var b in GetNearCellBullets(XX,YY))
         {
+            if(!b.isActiveAndEnabled) continue;
             if(b.Faction == a.Faction) continue;
-            if(Bullet.HitCheck(b,a.Obj.Position,a.Obj.GetSize().x/2))
+            if(Bullet.HitCheck(b,aPos,a.Obj.GetSize().x/2))
             {
                 a.TakeDamage(b.damageInfo);
                 b.Delete();
@@ -48,7 +51,20 @@ public class BulletContainer : ReplayObjContainer<Bullet>
     public override Bullet Create(string id, bool isIdCounting)
     {
         var data = BulletDB.Instance.GetData(id);
-        Bullet b = Instantiate(m_BulletPrefab).GetComponent<Bullet>();
+        Bullet b;
+        //b = Instantiate(m_BulletPrefab).GetComponent<Bullet>();
+        
+        if(m_bulletPool.Count > 0)
+        {
+            b = m_bulletPool.Dequeue();
+            b.gameObject.SetActive(true);
+        }
+        else
+        {
+            b = Instantiate(m_BulletPrefab).GetComponent<Bullet>();
+        }
+        
+        
         b.Init(data);
         b.ObjId = data.m_Id;
         if(isIdCounting)
@@ -74,6 +90,16 @@ public class BulletContainer : ReplayObjContainer<Bullet>
             }
         }
     }
+    public override void Delete(Bullet t)
+    {
+        //base.Delete(t);
+        
+        Items.Remove(t);
+        t.gameObject.SetActive(false);
+        m_bulletPool.Enqueue(t);
+        
+        
+    }
     private static void SettingCell()
     {
         ClearCell();
@@ -87,29 +113,40 @@ public class BulletContainer : ReplayObjContainer<Bullet>
             cell[YY,XX].Add(b);
         }
     }
+    private static List<Bullet> m_getNearBullets = new List<Bullet>();
     private static List<Bullet> GetNearCellBullets(int x, int y)
     {
-        List<Bullet> result = new List<Bullet>();
-        result.AddRange(GetCellBullets(x-1,y-1));
-        result.AddRange(GetCellBullets(x,y-1));
-        result.AddRange(GetCellBullets(x+1,y-1));
-        result.AddRange(GetCellBullets(x-1,y));
-        result.AddRange(GetCellBullets(x,y));
-        result.AddRange(GetCellBullets(x+1,y));
-        result.AddRange(GetCellBullets(x-1,y+1));
-        result.AddRange(GetCellBullets(x,y+1));
-        result.AddRange(GetCellBullets(x+1,y+1));
-        return result;
+        m_getNearBullets.Clear();
+        var l = GetCellBullets(x-1,y-1);
+        if(l.Count > 0)m_getNearBullets.AddRange(l);
+        l = GetCellBullets(x,y-1);
+        if(l.Count > 0)m_getNearBullets.AddRange(l);
+        l = GetCellBullets(x+1,y-1);
+        if(l.Count > 0)m_getNearBullets.AddRange(l);
+        l = GetCellBullets(x-1,y);
+        if(l.Count > 0)m_getNearBullets.AddRange(l);
+        l = GetCellBullets(x,y);
+        if(l.Count > 0)m_getNearBullets.AddRange(l);
+        l = GetCellBullets(x+1,y);
+        if(l.Count > 0)m_getNearBullets.AddRange(l);
+        l = GetCellBullets(x-1,y+1);
+        if(l.Count > 0)m_getNearBullets.AddRange(l);
+        l = GetCellBullets(x,y+1);
+        if(l.Count > 0)m_getNearBullets.AddRange(l);
+        l = GetCellBullets(x+1,y+1);
+        if(l.Count > 0)m_getNearBullets.AddRange(l);
+        return m_getNearBullets;
     }
     private static List<Bullet> GetCellBullets(int x, int y)
     {
         if(x < 0 || x >= CellCount || y < 0 || y > CellCount) return new ();
         if(cell[y,x] == null) return new ();
-        return cell[y,x].Get();
+        return cell[y,x].values;
     }
-    private const int CellCount = 10;
+    private const int CellCount = 20;
     private static Cell<Bullet>[,] cell = new Cell<Bullet>[CellCount,CellCount];
     [SerializeField]private GameObject m_BulletPrefab;
+    private Queue<Bullet> m_bulletPool = new Queue<Bullet>();
     public class Cell<T>
     {
         public Cell()

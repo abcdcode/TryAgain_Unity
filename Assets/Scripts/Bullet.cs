@@ -5,6 +5,7 @@ public class Bullet : ReplayMono
 {
     public static bool HitCheck(Bullet b, Vector2 target, float tSize)
     {
+        if(!b.isActiveAndEnabled) return false;
         return CalcUtils.SegmentCircle(b.Position,b.prevPos,target,tSize+b.GetSize().x/2);
     }
     public override void Awake()
@@ -15,6 +16,7 @@ public class Bullet : ReplayMono
     }
     public void Init(BulletSO d)
     {
+        m_CoolTimer.Clear();
         m_Data = d;
         renderer.sprite = m_Data.m_spriteSO.m_Sprite;
         m_Data.Init(this);
@@ -52,6 +54,7 @@ public class Bullet : ReplayMono
     }
     public override void Delete()
     {
+        //Debug.Log("Delete");
         BulletContainer.Instance.Delete(this);
     }
     public override void ExecuteCool(int id)

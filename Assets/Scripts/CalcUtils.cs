@@ -87,7 +87,7 @@ public static bool HitScan(Vector2 start, Vector2 end, Vector2 target, float r, 
     }
     public static void SetSize(this ReplayMono obj, Vector2 size)
     {
-        SetSize(obj.GetComponent<SpriteRenderer>(),size);
+        SetSize(obj.m_rederer,size);
     }
     public static void SetSize(this GameObject obj, Vector2 size)
     {
@@ -106,7 +106,7 @@ public static bool HitScan(Vector2 start, Vector2 end, Vector2 target, float r, 
     }
     public static Vector2 GetSize(this ReplayMono obj)
     {
-        return GetSize(obj.GetComponent<SpriteRenderer>());
+        return GetSize(obj.m_rederer);
     }
     public static Vector2 GetSize(this GameObject obj)
     {
@@ -114,7 +114,8 @@ public static bool HitScan(Vector2 start, Vector2 end, Vector2 target, float r, 
     }
     public static Vector2 GetSize(this SpriteRenderer renderer)
     {
+        Vector2 scale = renderer.transform.localScale;
         Vector2 spriteSize = renderer.sprite.bounds.size;
-        return new Vector2(renderer.transform.localScale.x * spriteSize.x, renderer.transform.localScale.y * spriteSize.y);
+        return new Vector2(scale.x * spriteSize.x, scale.y * spriteSize.y);
     }
 }

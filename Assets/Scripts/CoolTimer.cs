@@ -110,18 +110,27 @@ public class CoolTimer : IReplayable
             }
         }
     }
-
+    public void Clear()
+    {
+        coolDic.Clear();
+    }
+    private List<int> m_deads = new List<int>();
     public void GameUpdate()
     {
-        foreach(var pair in coolDic.ToList())
+        m_deads.Clear();
+        foreach(var pair in coolDic)
         {
             var ci = pair.Value;
             ci.cur += Time.deltaTime;
             if(ci.cur >= ci.cool)
             {
                 owner.ExecuteCool(pair.Key);
-                if(ci.IsOnce) DeleteCool(pair.Key);
+                if(ci.IsOnce) m_deads.Add(pair.Key);
             }
+        }
+        foreach(var d in m_deads)
+        {
+            DeleteCool(d);
         }
     }
     public ICoolOwner owner;

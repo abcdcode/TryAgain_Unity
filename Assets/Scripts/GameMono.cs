@@ -1,15 +1,29 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameMono : MonoBehaviour
 {
-    public virtual Vector2 Position
+    public virtual void FixedUpdate()
+    {
+    }
+    public virtual void GameUpdate()
+    {
+        
+    }
+    private Vector2 m_curPos = new Vector2(int.MaxValue,int.MaxValue);
+    public Vector2 Position
     {
         get
         {
-            return transform.position;
+            if(m_curPos.x == int.MaxValue)
+            {
+                return transform.position;
+            }
+            return m_curPos;
         }
         set
         {
+            m_curPos = value;
             transform.position = value;
         }
     }

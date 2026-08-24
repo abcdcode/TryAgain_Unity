@@ -82,15 +82,15 @@ public class CoolTimer : IReplayable
             pair.Value.Save(data);
         }
     }
-
+    private List<int> lkeys= new List<int>();
     public void Load(SaveData data)
     {
         int count = data;
-        List<int> keys = new ();
+        lkeys.Clear();
         for(int i = 0 ; i < count; i++)
         {
             int key = data;
-            keys.Add(key);
+            lkeys.Add(key);
             if(!coolDic.ContainsKey(key))
             {
                 CoolInfo info = new CoolInfo(0,0,false);
@@ -104,7 +104,7 @@ public class CoolTimer : IReplayable
         }
         foreach(var key in coolDic.Keys)
         {
-            if(!keys.Contains(key))
+            if(!lkeys.Contains(key))
             {
                 coolDic.Remove(key);
             }

@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -9,17 +10,21 @@ public class SaveData
 {
     public SaveData()
     {
-        buffer = new List<byte>();
+        
+        buffer = new List<byte>(10000);
         offset = 0;
     }
-    public void Write(ICollection<byte> bytes)
+    public void Write(Span<byte> bytes)
 {
-    buffer.AddRange(bytes);
+    foreach(var b in bytes)
+        {
+            buffer.Add(b);
+        }
 }
     public void Write<T>(T value) where T : unmanaged
 {
     Span<T> span = stackalloc T[] { value };
-    Write(MemoryMarshal.AsBytes(span).ToArray());
+    Write(MemoryMarshal.AsBytes(span));
 }
 
     public void Write(string value)
@@ -102,6 +107,7 @@ public int ReadInt()
     }
     public double ReadDouble()
     {
+        
         var result = BitConverter.ToDouble(data,offset);
         offset += sizeof(double);
         return result;
@@ -150,9 +156,17 @@ public int ReadInt()
     }
 public void Save()
     {
-        data = buffer.ToArray();
-        buffer.Clear();
+        var p = ArrayPool<byte>.Shared;
+        data = p.Rent(buffer.Count);
+        buffer.CopyTo(data);
+        //data = buffer.ToArray();
+        //buffer.Clear();
         offset = 0;
+    }
+    public void Dispose()
+    {
+        var p = ArrayPool<byte>.Shared;
+        p.Return(data);
     }
     public static implicit operator bool(SaveData p) => p.ReadBool();
     public static implicit operator byte(SaveData p) => p.ReadByte();

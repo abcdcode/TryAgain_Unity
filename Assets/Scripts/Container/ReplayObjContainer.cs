@@ -22,7 +22,8 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
         {
             int indexId = data;
             int objId = data;
-            var item = Items.Find(x => x.IndexId == indexId);
+            T item;
+            item = Items.Count > i && Items[i].IndexId == indexId ? Items[i] : Items.Find(x => x.IndexId == indexId);
             if(item != null)
             {
                 item.Load(data);
@@ -36,12 +37,17 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
             }
             list.Add(indexId);
         }
-        foreach(var i in Items.ToArray())
+        var d = new List<T>();
+        foreach(var i in Items)
         {
             if(!list.Contains(i.IndexId))
             {
-                i.Delete();
+                d.Add(i);
             }
+        }
+        foreach(var i in d)
+        {
+            i.Delete();
         }
     }
     public virtual void Add(T t)

@@ -14,15 +14,6 @@ public class GameManager : SingletonBehavior<GameManager>
         Application.targetFrameRate = 120;
         ReplayHamburger.Instance.Reset();
         m_ContainerList = GetComponents<IReplayable>().ToList();
-        /*
-        foreach(var c in Containers)
-        {
-            if(c is IReplayable i)
-            {
-                m_ContainerList.Add(i);
-            }
-        }
-        */
         CurPlayer = Instantiate(m_playerPrefab).GetComponent<Player>();
         CurPlayer.Position = new Vector2(0,0);
         for(int i = 0 ; i < 100; i++)
@@ -96,7 +87,7 @@ public class GameManager : SingletonBehavior<GameManager>
     }
     void Save()
     {
-        /*
+        
         SaveData data = new SaveData();
         CurPlayer.Save(data);
         foreach(var c in m_ContainerList)
@@ -105,7 +96,7 @@ public class GameManager : SingletonBehavior<GameManager>
         }
         data.Save();
         ReplayHamburger.Instance.Save(CurFrame,data);
-        */
+        
     }
     void Load()
     {
@@ -122,6 +113,7 @@ public class GameManager : SingletonBehavior<GameManager>
         {
             c.Load(data);
         }
+        data.Dispose();
     }
     public GameManagerState State{get;set;}
     public Player CurPlayer{get;private set;}

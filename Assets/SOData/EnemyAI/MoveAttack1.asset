@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI_MoveLeftAndAttack
   m_Id: MoveAttack1
   m_speed: 200
-  m_shotCool: 1
+  m_shotCool: 0.1

@@ -117,23 +117,17 @@ public class CoolTimer : IReplayable
     {
         coolDic.Clear();
     }
-    private List<int> m_deads = new List<int>();
     public void GameUpdate()
     {
-        m_deads.Clear();
-        foreach(var pair in coolDic)
+        foreach(var pair in coolDic.ToArray())
         {
             var ci = pair.Value;
             ci.cur += Time.deltaTime;
             if(ci.cur >= ci.cool)
             {
+                if(ci.IsOnce) DeleteCool(pair.Key);
                 owner.ExecuteCool(pair.Key);
-                if(ci.IsOnce) m_deads.Add(pair.Key);
             }
-        }
-        foreach(var d in m_deads)
-        {
-            DeleteCool(d);
         }
     }
     public void LateGameUpdate()

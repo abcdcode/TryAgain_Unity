@@ -6,19 +6,18 @@ public class Bullet : ReplayMono
     public static bool HitCheck(Bullet b, Vector2 target, float tSize)
     {
         if(!b.isActiveAndEnabled) return false;
-        return CalcUtils.SegmentCircle(b.Position,b.prevPos,target,tSize+b.GetSize().x/2);
+        return CalcUtils.SegmentCircle(b.Position,b.prevPos,target,tSize+b.GetSize().x/2 * b.m_Data.m_bulletSize);
     }
     public override void Awake()
     {
         base.Awake();
-        renderer = GetComponent<SpriteRenderer>();
         
     }
     public void Init(BulletSO d)
     {
         m_CoolTimer.Clear();
         m_Data = d;
-        renderer.sprite = m_Data.m_spriteSO.m_Sprite;
+        m_rederer.sprite = m_Data.m_spriteSO.m_Sprite;
         m_Data.Init(this);
     }
     public void InitPos(Vector2 pos)
@@ -39,7 +38,7 @@ public class Bullet : ReplayMono
     {
         base.Load(data);
         prevPos = data;
-        int id = data;
+        ushort id = data;
         if(m_Data == null || BulletDB.Instance.ConvertId(m_Data.m_Id) != id)
         {
             var newData = BulletDB.Instance.GetData(id);
@@ -68,10 +67,17 @@ public class Bullet : ReplayMono
             return;
         }
     }
+    public override void OnDrawGizmos()
+    {
+        if(GameManager.Instance == null) return;
+        if(GameManager.Instance.IsDebug)
+        {
+            Gizmos.DrawSphere(Position,this.GetSize().x/2 * m_Data.m_bulletSize);
+        }
+    }
     public DamageInfo damageInfo;
     public FactionEnum Faction{get;set;}
     private Vector2 prevPos;
-    private SpriteRenderer renderer;
     public BulletSO m_Data;
 }
 public enum BulletCoolEnum

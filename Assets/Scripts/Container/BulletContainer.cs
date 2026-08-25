@@ -38,12 +38,12 @@ public class BulletContainer : ReplayObjContainer<Bullet>
             }
         }
     }
-    public override int ConvertId(string id)
+    public override ushort ConvertId(string id)
     {
         return BulletDB.Instance.ConvertId(id);
     }
 
-    public override string ConvertId(int id)
+    public override string ConvertId(ushort id)
     {
         return BulletDB.Instance.ConvertId(id);
     }
@@ -109,7 +109,7 @@ public class BulletContainer : ReplayObjContainer<Bullet>
             var cY = GameManager.ScreenY/CellCount;
             int YY = (int)(b.Position.y+GameManager.ScreenY/2)/cY;
             int XX = (int)(b.Position.x+GameManager.ScreenX/2)/cX;
-            if(XX < 0 || XX >= CellCount || YY < 0 || YY > CellCount) continue;
+            if(XX < 0 || XX >= CellCount || YY < 0 || YY >= CellCount) continue;
             cell[YY,XX].Add(b);
         }
     }
@@ -139,7 +139,7 @@ public class BulletContainer : ReplayObjContainer<Bullet>
     }
     private static List<Bullet> GetCellBullets(int x, int y)
     {
-        if(x < 0 || x >= CellCount || y < 0 || y > CellCount) return new ();
+        if(x < 0 || x >= CellCount || y < 0 || y >= CellCount) return new ();
         if(cell[y,x] == null) return new ();
         return cell[y,x].values;
     }

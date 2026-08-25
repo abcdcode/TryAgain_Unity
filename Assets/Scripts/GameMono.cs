@@ -10,6 +10,10 @@ public class GameMono : MonoBehaviour
     {
         
     }
+    public virtual void LateGameUpdate()
+    {
+        
+    }
     private Vector2 m_curPos = new Vector2(int.MaxValue,int.MaxValue);
     private Vector2 m_Scale = new Vector2(int.MaxValue,int.MaxValue);
     private float m_angle = 99999;

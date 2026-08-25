@@ -8,22 +8,23 @@ using UnityEngine;
 
 public class SaveData
 {
+    private static List<byte> buffer = new List<byte>();
+    
     public SaveData()
     {
-        
-        buffer = new List<byte>(10000);
+        buffer.Clear();
         offset = 0;
     }
     public void Write(Span<byte> bytes)
 {
-    foreach(var b in bytes)
-        {
-            buffer.Add(b);
-        }
+        
+    for (int i = 0; i < bytes.Length; i++)
+        buffer.Add(bytes[i]);
+        
 }
     public void Write<T>(T value) where T : unmanaged
 {
-    Span<T> span = stackalloc T[] { value };
+    Span<T> span = new T[] { value };
     Write(MemoryMarshal.AsBytes(span));
 }
 
@@ -33,11 +34,13 @@ public class SaveData
         this.Write(tmp.Length);
         this.Write(tmp);
 	}
+    
     public void Write(Vector2 value)
     {
         this.Write(value.x);
         this.Write(value.y);
     }
+    
     public void WriteIList<T>(IList<T> l, Action<T> writer)
     {
         Write(l.Count);
@@ -81,6 +84,12 @@ public short ReadShort()
         offset += sizeof(short);
         return result;
     }
+    public ushort ReadUShort()
+    {
+        var result = BitConverter.ToUInt16(data,offset);
+        offset += sizeof(ushort);
+        return result;
+    }
 public int ReadInt()
     {
         var result = BitConverter.ToInt32(data,offset);
@@ -96,7 +105,7 @@ public int ReadInt()
     public ulong ReadULong()
     {
         var result = BitConverter.ToUInt64(data,offset);
-        offset += sizeof(long);
+        offset += sizeof(ulong);
         return result;
     }
     public float ReadFloat()
@@ -156,8 +165,9 @@ public int ReadInt()
     }
 public void Save()
     {
-        var p = ArrayPool<byte>.Shared;
-        data = p.Rent(buffer.Count);
+        //var p = ArrayPool<byte>.Shared;
+        //data = p.Rent(buffer.Count);
+        data = new byte[buffer.Count];
         buffer.CopyTo(data);
         //data = buffer.ToArray();
         //buffer.Clear();
@@ -165,12 +175,13 @@ public void Save()
     }
     public void Dispose()
     {
-        var p = ArrayPool<byte>.Shared;
-        p.Return(data);
+        //var p = ArrayPool<byte>.Shared;
+        //p.Return(data);
     }
     public static implicit operator bool(SaveData p) => p.ReadBool();
     public static implicit operator byte(SaveData p) => p.ReadByte();
     public static implicit operator short(SaveData p) => p.ReadShort();
+    public static implicit operator ushort(SaveData p) => p.ReadUShort();
     public static implicit operator int(SaveData p) => p.ReadInt();
     public static implicit operator long(SaveData p) => p.ReadLong();
     public static implicit operator ulong(SaveData p) => p.ReadULong();
@@ -191,7 +202,7 @@ public void Save()
     public static implicit operator Dictionary<int,string>(SaveData p) => p.ReadDic<int,string>(p.ReadInt,p.ReadString);
     public static implicit operator Dictionary<string,int>(SaveData p) => p.ReadDic<string,int>(p.ReadString,p.ReadInt);
     public static implicit operator Dictionary<string,string>(SaveData p) => p.ReadDic<string,string>(p.ReadString,p.ReadString);
-    public List<byte> buffer;
+    //public List<byte> buffer;
     public byte[] data;
     public int offset;
 }

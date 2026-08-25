@@ -76,10 +76,13 @@ public class CoolTimer : IReplayable
     public void Save(SaveData data)
     {
         data.Write(coolDic.Count);
-        foreach(var pair in coolDic)
+        if(coolDic.Count > 0)
         {
-            data.Write(pair.Key);
-            pair.Value.Save(data);
+            foreach(var pair in coolDic)
+            {
+                data.Write(pair.Key);
+                pair.Value.Save(data);
+            }
         }
     }
     private List<int> lkeys= new List<int>();
@@ -133,6 +136,10 @@ public class CoolTimer : IReplayable
             DeleteCool(d);
         }
     }
+    public void LateGameUpdate()
+    {
+        
+    }
     public ICoolOwner owner;
     public Dictionary<int,CoolInfo> coolDic;
     public class CoolInfo : IReplayable
@@ -164,6 +171,10 @@ public class CoolTimer : IReplayable
 
         public void GameUpdate()
         {
+        }
+        public void LateGameUpdate()
+        {
+            
         }
     }
 }

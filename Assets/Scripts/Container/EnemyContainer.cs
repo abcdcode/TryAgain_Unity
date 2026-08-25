@@ -1,11 +1,11 @@
 public class EnemyContainer : ReplayObjContainer<Enemy>
 {
-    public override int ConvertId(string id)
+    public override ushort ConvertId(string id)
     {
         return EnemyDB.Instance.ConvertId(id);
     }
 
-    public override string ConvertId(int id)
+    public override string ConvertId(ushort id)
     {
         return EnemyDB.Instance.ConvertId(id);
     }

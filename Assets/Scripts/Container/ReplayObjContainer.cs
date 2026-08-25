@@ -7,11 +7,12 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
     public virtual void Save(SaveData data)
     {
         data.Write(Items.Count);
-        foreach(var i in Items)
+        for(int i=0 ; i < Items.Count; i++)
         {
-            data.Write(i.IndexId);
-            data.Write(ConvertId(i.ObjId));
-            i.Save(data);
+            var it = Items[i];
+            data.Write(it.IndexId);
+            data.Write(ConvertId(it.ObjId));
+            it.Save(data);
         }
     }
     public virtual void Load(SaveData data)
@@ -21,7 +22,7 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
         for(int i = 0 ; i < count; i++)
         {
             int indexId = data;
-            int objId = data;
+            ushort objId = data;
             T item;
             item = Items.Count > i && Items[i].IndexId == indexId ? Items[i] : Items.Find(x => x.IndexId == indexId);
             if(item != null)
@@ -57,17 +58,21 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
     public virtual void Delete(T t)
     {
         Items.Remove(t);
-        if(t is ReplayMono mono)
-        {
-            Destroy(mono.gameObject);
-        }
+            if(t is ReplayMono mono)
+            {
+                Destroy(mono.gameObject);
+            }
+        
     }
-    public abstract int ConvertId(string id);
-    public abstract string ConvertId(int id);
+    public abstract ushort ConvertId(string id);
+    public abstract string ConvertId(ushort id);
     public abstract T Create(string id, bool isIdCounting);
     public virtual void GameUpdate()
     {
         GetList().ForEach(x => x.GameUpdate());
+    }
+    public virtual void LateGameUpdate()
+    {
     }
     protected int GetNextId()
     {

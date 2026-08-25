@@ -18,5 +18,9 @@ public class IdCountManager : SingletonBehavior<IdCountManager>, IReplayable
     {
     }
 
+    public void LateGameUpdate()
+    {
+    }
+
     private int id = 0;
 }

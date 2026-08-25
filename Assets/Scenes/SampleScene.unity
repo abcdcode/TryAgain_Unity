@@ -200,7 +200,7 @@ Camera:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 4
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -605,6 +605,7 @@ GameObject:
   - component: {fileID: 1368819176}
   - component: {fileID: 1368819178}
   - component: {fileID: 1368819179}
+  - component: {fileID: 1368819180}
   m_Layer: 0
   m_Name: DBContainer
   m_TagString: Untagged
@@ -626,6 +627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BulletDB
   items:
   - {fileID: 11400000, guid: 3fee23e65817288419a955f0ffa2cca3, type: 2}
+  - {fileID: 11400000, guid: ebac38a2b859ace4ebcc048a8ab40762, type: 2}
 --- !u!4 &1368819177
 Transform:
   m_ObjectHideFlags: 0
@@ -655,6 +657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteDB
   items:
   - {fileID: 11400000, guid: 51379d163ae446c4eb7e6c04b578dc49, type: 2}
+  - {fileID: 11400000, guid: 2c282003009aecc45a4463dc0182fe65, type: 2}
 --- !u!114 &1368819179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,6 +672,73 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDB
   items:
   - {fileID: 11400000, guid: f3f72c56e6c82f340b743095ae61f681, type: 2}
+--- !u!114 &1368819180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368819175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71caa7102e1bf740afc3f7054c7334d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAIDB
+  items:
+  - {fileID: 11400000, guid: f8cab9a0c5ad42e4d99a124cf9fd2cc4, type: 2}
+  - {fileID: 11400000, guid: 8257178e0a5be9945bd6f34e51e728ba, type: 2}
+--- !u!1 &1601706193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1601706195}
+  - component: {fileID: 1601706194}
+  m_Layer: 0
+  m_Name: InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1601706194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601706193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d976d3aab9fb147a9ba7e454f7343a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputManager
+  m_MoveAction:
+  - {fileID: 8468040874900578005, guid: 62a3f5063363c0f40bc59c949d78de4b, type: 3}
+  m_AttackAction:
+  - {fileID: 3457191651664220234, guid: 62a3f5063363c0f40bc59c949d78de4b, type: 3}
+  m_ReplayAction:
+  - {fileID: 5280248488132624697, guid: 62a3f5063363c0f40bc59c949d78de4b, type: 3}
+  m_ESCAction:
+  - {fileID: -7161729726170926574, guid: 62a3f5063363c0f40bc59c949d78de4b, type: 3}
+--- !u!4 &1601706195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601706193}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 672.4735, y: 125.32126, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1706168592
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,7 +831,8 @@ GameObject:
   - component: {fileID: 1710443394}
   - component: {fileID: 1710443396}
   - component: {fileID: 1710443397}
-  - component: {fileID: 1710443395}
+  - component: {fileID: 1710443399}
+  - component: {fileID: 1710443398}
   m_Layer: 0
   m_Name: ManagerContainer
   m_TagString: Untagged
@@ -813,26 +884,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BulletContainer
   Items: []
   m_BulletPrefab: {fileID: 6206921571643554147, guid: 866d743507b14db45b4f29feb8d2ede7, type: 3}
---- !u!114 &1710443395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1710443391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7d976d3aab9fb147a9ba7e454f7343a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InputManager
-  m_MoveAction:
-  - {fileID: 8468040874900578005, guid: 62a3f5063363c0f40bc59c949d78de4b, type: 3}
-  m_AttackAction:
-  - {fileID: 3457191651664220234, guid: 62a3f5063363c0f40bc59c949d78de4b, type: 3}
-  m_ReplayAction:
-  - {fileID: 5280248488132624697, guid: 62a3f5063363c0f40bc59c949d78de4b, type: 3}
-  m_ESCAction:
-  - {fileID: -7161729726170926574, guid: 62a3f5063363c0f40bc59c949d78de4b, type: 3}
 --- !u!114 &1710443396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,6 +909,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyContainer
   Items: []
+--- !u!114 &1710443398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710443391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571080f5307535548924ad7fb5122e32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+--- !u!114 &1710443399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710443391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2af4d30a92b359a47962b5584d40675d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SeedManager
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -868,3 +943,4 @@ SceneRoots:
   - {fileID: 1368819177}
   - {fileID: 892477128}
   - {fileID: 1706168595}
+  - {fileID: 1601706195}

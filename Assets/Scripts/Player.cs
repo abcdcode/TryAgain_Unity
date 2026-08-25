@@ -18,12 +18,12 @@ public class Player : ReplayMono, IHitable
     public override void GameUpdate()
     {
         base.GameUpdate();
+        BulletContainer.HitCheckNew(this);
         var input = InputManager.Instance.InputInfo;
         //방향키 인풋
         var MoveDir = input.MoveDir;
         //이동
-        this.Position += MoveDir.normalized*1000*Time.deltaTime;
-        this.Position = CalcUtils.ScreenClamp(this.Position,this.GetSize());
+        this.Position = CalcUtils.ScreenClamp(this.Position+MoveDir.normalized*1000*Time.deltaTime,this.GetSize());
         var isAtk = input.OnAttack;
         if(isAtk)
         {
@@ -37,6 +37,7 @@ public class Player : ReplayMono, IHitable
         b.Angle = 0;
         b.SetSize(new Vector2(100,100));
         b.Faction = FactionEnum.Player;
+        b.damageInfo = new DamageInfo(){dmg = 10, faction = FactionEnum.Player};
     }
     public override void Delete()
     {

@@ -118,4 +118,28 @@ public static bool HitScan(Vector2 start, Vector2 end, Vector2 target, float r, 
         Vector2 spriteSize = renderer.sprite.bounds.size;
         return new Vector2(scale.x * spriteSize.x, scale.y * spriteSize.y);
     }
+    /// <summary>
+    /// looAt 방향을 바라봄
+    /// </summary>
+    /// <param name="t"></param>
+    /// <param name="lookAt"></param>
+    public static void SetAngle(this GameMono t, Vector2 lookAt)
+    {
+        float angle = Mathf.Atan2(lookAt.y, lookAt.x) * Mathf.Rad2Deg;
+        t.Angle = angle;
+    }
+    /// <summary>
+    /// targetPos를 바라봄
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <param name="targetPos"></param>
+    public static void LookAt(this GameMono obj, Vector2 targetPos)
+    {
+        var vec = targetPos - obj.Position;
+        obj.SetAngle(vec);
+    }
+    public static void MoveForward(this GameMono obj, float value)
+    {
+        obj.Position += (Vector2)obj.transform.right.normalized * value * Time.deltaTime;
+    }
 }

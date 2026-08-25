@@ -16,12 +16,16 @@ public class GameManager : SingletonBehavior<GameManager>
         m_ContainerList = GetComponents<IReplayable>().ToList();
         CurPlayer = Instantiate(m_playerPrefab).GetComponent<Player>();
         CurPlayer.Position = new Vector2(0,0);
-        for(int i = 0 ; i < 100; i++)
+        /*
+        for(int i = 0 ; i < 1000; i++)
         {
             var e = EnemyContainer.Instance.Create("TestEnemy",true);
             e.Position = new Vector2(600,0);
             e.SetSize(new Vector2(100,100));
         }
+        */
+        SeedManager.Instance.InitSeed(Random.Range(0,10000000));
+        WaveManager.Instance.SetTestWave();
         CurFrame = 0;
         State = GameManagerState.Playing;
     }
@@ -83,6 +87,11 @@ public class GameManager : SingletonBehavior<GameManager>
         Save();
         sw.Stop();
         tick2 = sw.ElapsedTicks;
+        CurPlayer.LateGameUpdate();
+        foreach(var c in m_ContainerList)
+        {
+            c.LateGameUpdate();
+        }
         CurFrame += 1;
     }
     void Save()

@@ -15,3 +15,4 @@ MonoBehaviour:
   m_Id: TestEnemy
   Hp: 100
   m_Prefab: {fileID: 7700300238775290631, guid: fc05c49c67ec0c84883eacb6fcd18b8b, type: 3}
+  m_Size: 100

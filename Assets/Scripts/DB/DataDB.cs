@@ -7,9 +7,9 @@ public abstract class DataDB<T> : SingletonBehavior<DataDB<T>> where T : SOData
     public override void Awake()
     {
         base.Awake();
-        idDic = new BiDictionary<string, int>();
-        itemDic = new Dictionary<int, T>();
-        int id = 1;
+        idDic = new BiDictionary<string, ushort>();
+        itemDic = new Dictionary<ushort, T>();
+        ushort id = 1;
         foreach(var i in items)
         {
             idDic.Add(i.m_Id,id);
@@ -17,7 +17,7 @@ public abstract class DataDB<T> : SingletonBehavior<DataDB<T>> where T : SOData
             id++;
         }
     }
-    public virtual int GetId(T data)
+    public virtual ushort GetId(T data)
     {
         return ConvertId(data.m_Id);
     }
@@ -25,20 +25,20 @@ public abstract class DataDB<T> : SingletonBehavior<DataDB<T>> where T : SOData
     {
         return GetData(idDic.Get(id));
     }
-    public virtual T GetData(int id)
+    public virtual T GetData(ushort id)
     {
         if(!itemDic.ContainsKey(id)) return null;
         return itemDic[id];
     }
-    public virtual string ConvertId(int id)
+    public virtual string ConvertId(ushort id)
     {
         return idDic.Get(id);
     }
-    public virtual int ConvertId(string id)
+    public virtual ushort ConvertId(string id)
     {
         return idDic.Get(id);
     }
-    protected BiDictionary<string,int> idDic;
-    protected Dictionary<int, T> itemDic;
+    protected BiDictionary<string,ushort> idDic;
+    protected Dictionary<ushort, T> itemDic;
     [SerializeField] protected List<T> items;
 }

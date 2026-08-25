@@ -7,9 +7,11 @@ public class ReplayAnimator :GameMono,IReplayable
     {
         m_parent = GetComponent<ReplayMono>();
     }
-    public void GameUpdate()
+    public override void GameUpdate()
     {
+        base.GameUpdate();
     }
+
 
     public void Load(SaveData data)
     {

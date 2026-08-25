@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class BulletSO : ReplaySO<Bullet>
 {
     [SerializeField]public SpriteSO m_spriteSO;
-    [SerializeField]public float m_bulletSize;
+    [SerializeField]public float m_bulletSize = 1;
     public virtual void Init(Bullet bullet)
     {
         

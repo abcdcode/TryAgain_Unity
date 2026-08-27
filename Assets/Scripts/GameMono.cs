@@ -10,6 +10,12 @@ public class GameMono : MonoBehaviour
     {
         
     }
+    public virtual void OnEnable()
+    {
+        m_curPos = new Vector2(int.MaxValue,int.MaxValue);
+        m_Scale = new Vector2(int.MaxValue,int.MaxValue);
+        m_angle = 99999;
+    }
     public virtual void LateGameUpdate()
     {
         
@@ -62,7 +68,7 @@ public class GameMono : MonoBehaviour
         {
             if(m_angle == 99999)
             {
-                m_angle = transform.eulerAngles.z;
+                Angle = transform.eulerAngles.z;
                 return transform.eulerAngles.z;
             }
             return m_angle;

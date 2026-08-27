@@ -32,7 +32,7 @@ public class Bullet : ReplayMono
         var id = BulletDB.Instance.ConvertId(m_Data.m_Id);
         data.Write(id);
         m_Data.Save(data,this);
-        
+        prevPos = Position;
     }
     public override void Load(SaveData data)
     {

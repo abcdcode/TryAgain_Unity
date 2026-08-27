@@ -6,7 +6,6 @@ public abstract class BulletSO : ReplaySO<Bullet>
     [SerializeField]public float m_bulletSize = 1;
     public virtual void Init(Bullet bullet)
     {
-        
     }
     public override void Save(SaveData data, Bullet bullet)
     {

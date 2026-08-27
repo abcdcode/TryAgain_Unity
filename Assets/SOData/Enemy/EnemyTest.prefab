@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc7558b1bf2bff4f8f3b76c6e0d3ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  m_rederer: {fileID: 0}
   m_animator: {fileID: 0}
   EnemyData: {fileID: 0}
   EnemyAIData: {fileID: 0}

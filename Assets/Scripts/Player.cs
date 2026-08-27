@@ -14,6 +14,7 @@ public class Player : ReplayMono, IHitable
     {
         base.Awake();
         this.SetSize(new Vector2(100,100));
+        Stat = new CharacterStat();
     }
     public override void GameUpdate()
     {
@@ -42,6 +43,5 @@ public class Player : ReplayMono, IHitable
     public override void Delete()
     {
     }
-
-    
+    public CharacterStat Stat{get;private set;}
 }

@@ -96,7 +96,7 @@ public static class WavePreset
         Wave result = new Wave();
         for(int i = 0; i < 100; i ++)
         {
-            var vec = new Vector2(1000,SeedManager.Instance.GetFloat(-500,500));
+            var vec = new Vector2(1200,SeedManager.Instance.GetFloat(-500,500));
             WaveData data = new(EnemyDB.TestEnemy,vec,EnemyAIDB.MoveAttack1,i*0.1f);
             result.DataList.Add(data);
         }

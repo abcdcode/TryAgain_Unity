@@ -12,6 +12,7 @@ public abstract class ReplayMono : GameMono, IReplayObj, ICoolOwner
         m_CoolTimer = new CoolTimer(this);
         m_rederer = GetComponent<SpriteRenderer>();
     }
+    
 
     public override void GameUpdate()
     {

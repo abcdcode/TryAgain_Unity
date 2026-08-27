@@ -140,6 +140,11 @@ public static bool HitScan(Vector2 start, Vector2 end, Vector2 target, float r, 
     }
     public static void MoveForward(this GameMono obj, float value)
     {
-        obj.Position += (Vector2)obj.transform.right.normalized * value * Time.deltaTime;
+        float radian = obj.Angle * Mathf.Deg2Rad;
+        Vector2 direction = new Vector2(
+        Mathf.Cos(radian),
+        Mathf.Sin(radian)
+    );
+        obj.Position += direction.normalized * value * Time.deltaTime;
     }
 }

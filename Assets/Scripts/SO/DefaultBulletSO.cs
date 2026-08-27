@@ -16,7 +16,7 @@ public class DefaultBulletSO : BulletSO
     public override void GameUpdate(Bullet bullet)
     {
         base.GameUpdate(bullet);
-        bullet.Position += (Vector2)bullet.transform.right.normalized * m_speed * Time.deltaTime;
+        bullet.MoveForward(m_speed);
     }
     public override void ExecuteCool(Bullet bullet, int value)
     {

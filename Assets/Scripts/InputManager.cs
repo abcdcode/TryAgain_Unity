@@ -15,6 +15,8 @@ public struct tInputInfo
     public bool OnReplay; // 리플레이 키 눌림 상태
     public bool OnESC; // ESC 키 눌림 상태
     public bool OnESCDown; // 리플레이 키 눌림 상태 - 1프레임
+    public bool OnActiveDown; // 액티브 키 눌림 상태 - 1프레임
+    public bool OnChangeDown; // 액티브 전환 키 눌림 상태 - 1프레임
 }
 
 public class InputManager : SingletonBehavior<InputManager>
@@ -24,6 +26,8 @@ public class InputManager : SingletonBehavior<InputManager>
     [SerializeField] private List<InputActionReference> m_AttackAction;
     [SerializeField] private List<InputActionReference> m_ReplayAction;
     [SerializeField] private List<InputActionReference> m_ESCAction;
+    [SerializeField] private List<InputActionReference> m_ActiveAction;
+    [SerializeField] private List<InputActionReference> m_ChangeAction;
 
     private tInputInfo m_tInputInfo;
     public tInputInfo InputInfo => m_tInputInfo;
@@ -38,6 +42,8 @@ public class InputManager : SingletonBehavior<InputManager>
         EnableAll(m_AttackAction);
         EnableAll(m_ReplayAction);
         EnableAll(m_ESCAction);
+        EnableAll(m_ActiveAction);
+        EnableAll(m_ChangeAction);
     }
 
     private void OnDestroy()
@@ -46,6 +52,8 @@ public class InputManager : SingletonBehavior<InputManager>
         DisableAll(m_AttackAction);
         DisableAll(m_ReplayAction);
         DisableAll(m_ESCAction);
+        DisableAll(m_ActiveAction);
+        DisableAll(m_ChangeAction);
     }
 
     private void Update()
@@ -55,6 +63,8 @@ public class InputManager : SingletonBehavior<InputManager>
         m_tInputInfo.OnReplay = ReadIsPressed(m_ReplayAction);
         m_tInputInfo.OnESC = ReadIsPressed(m_ESCAction);
         m_tInputInfo.OnESCDown = ReadIsDown(m_ESCAction);
+        m_tInputInfo.OnActiveDown = ReadIsDown(m_ActiveAction);
+        m_tInputInfo.OnChangeDown = ReadIsDown(m_ChangeAction);
     }
 
     // 여러 이동 소스 중 크기가 가장 큰 입력을 선택 (덮어쓰기 버그 방지)

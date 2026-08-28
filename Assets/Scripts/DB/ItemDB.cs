@@ -1,4 +1,6 @@
-public class ItemDB : DataDB<ItemSO>
+using System.Collections.Generic;
+
+public class ItemDB : DataDB<ItemDataSO>
 {
-    
+
 }

@@ -15,7 +15,7 @@ public class GameManager : SingletonBehavior<GameManager>
         ReplayHamburger.Instance.Reset();
         m_ContainerList = GetComponents<IReplayable>().ToList();
         CurPlayer = Instantiate(m_playerPrefab).GetComponent<Player>();
-        CurPlayer.Position = new Vector2(0,0);
+        CurPlayer.Position = new Vector2(0, 0);
         /*
         for(int i = 0 ; i < 1000; i++)
         {
@@ -24,7 +24,7 @@ public class GameManager : SingletonBehavior<GameManager>
             e.SetSize(new Vector2(100,100));
         }
         */
-        SeedManager.Instance.InitSeed(Random.Range(0,10000000));
+        SeedManager.Instance.InitSeed(Random.Range(0, 10000000));
         WaveManager.Instance.SetTestWave();
         CurFrame = 0;
         State = GameManagerState.Playing;
@@ -35,12 +35,12 @@ public class GameManager : SingletonBehavior<GameManager>
     void StateCheck()
     {
         var inputinfo = InputManager.Instance.InputInfo;
-        if(inputinfo.OnESCDown)
+        if (inputinfo.OnESCDown)
         {
             State = State == GameManagerState.Pause ? GameManagerState.Playing : GameManagerState.Pause;
         }
-        if(State == GameManagerState.Pause) return;
-        if(inputinfo.OnReplay)
+        if (State == GameManagerState.Pause) return;
+        if (inputinfo.OnReplay)
         {
             State = GameManagerState.Replay;
         }
@@ -53,21 +53,26 @@ public class GameManager : SingletonBehavior<GameManager>
     {
         var v = System.DateTime.Now.Millisecond;
         StateCheck();
-        if(State == GameManagerState.Playing)
+        if (State == GameManagerState.Playing)
         {
             GameUpdate();
         }
-        if(State == GameManagerState.Pause)
+        if (State == GameManagerState.Pause)
         {
-            
+
         }
-        if(State == GameManagerState.Replay)
+        if (State == GameManagerState.Replay)
         {
             Load();
         }
         var v2 = System.DateTime.Now.Millisecond;
-
-        m_DebugText.text = $"Time : {CurFrame} , GameManager Frame Time : {v2 - v} ms , Tick1 {tick1}, Tick2 {tick2}";
+        if (IsDebug)
+        {
+            m_DebugText.text = $"Time : {CurFrame} , GameManager Frame Time : {v2 - v} ms , Tick1 {tick1}, Tick2 {tick2}";
+        } else
+        {
+            m_DebugText.text = "";
+        }
     }
     private long tick1;
     private long tick2;
@@ -75,8 +80,8 @@ public class GameManager : SingletonBehavior<GameManager>
     {
         Stopwatch sw = Stopwatch.StartNew();
         CurPlayer.GameUpdate();
-        
-        foreach(var c in m_ContainerList)
+
+        foreach (var c in m_ContainerList)
         {
             c.GameUpdate();
         }
@@ -88,7 +93,7 @@ public class GameManager : SingletonBehavior<GameManager>
         sw.Stop();
         tick2 = sw.ElapsedTicks;
         CurPlayer.LateGameUpdate();
-        foreach(var c in m_ContainerList)
+        foreach (var c in m_ContainerList)
         {
             c.LateGameUpdate();
         }
@@ -96,41 +101,42 @@ public class GameManager : SingletonBehavior<GameManager>
     }
     void Save()
     {
-        
+
         SaveData data = new SaveData();
         CurPlayer.Save(data);
-        foreach(var c in m_ContainerList)
+        foreach (var c in m_ContainerList)
         {
             c.Save(data);
         }
         data.Save();
-        ReplayHamburger.Instance.Save(CurFrame,data);
-        
+        ReplayHamburger.Instance.Save(CurFrame, data);
+
     }
     void Load()
     {
-        if(CurFrame > 0) 
+        if (CurFrame > 0)
         {
             CurFrame -= 1;
-        } else
+        }
+        else
         {
             return;
         }
         var data = ReplayHamburger.Instance.Load(CurFrame);
         CurPlayer.Load(data);
-        foreach(var c in m_ContainerList)
+        foreach (var c in m_ContainerList)
         {
             c.Load(data);
         }
         data.Dispose();
     }
-    public GameManagerState State{get;set;}
-    public Player CurPlayer{get;private set;}
-    public int CurFrame{get;private set;}
+    public GameManagerState State { get; set; }
+    public Player CurPlayer { get; private set; }
+    public int CurFrame { get; private set; }
     private List<IReplayable> m_ContainerList;
-    [SerializeField]private GameObject m_playerPrefab;
-    [SerializeField]private TextMeshProUGUI m_DebugText;
-    [SerializeField]public bool IsDebug;
+    [SerializeField] private GameObject m_playerPrefab;
+    [SerializeField] private TextMeshProUGUI m_DebugText;
+    [SerializeField] public bool IsDebug;
     public const int ScreenX = 1920;
     public const int ScreenY = 1080;
 }

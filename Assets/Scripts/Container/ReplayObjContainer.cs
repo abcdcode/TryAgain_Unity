@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContainer<T>>, IReplayable where T : IReplayObj
 {
+    
     public virtual void Save(SaveData data)
     {
         data.Write(Items.Count);
@@ -15,6 +16,20 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
             it.Save(data);
         }
     }
+    
+    /*
+    public virtual void Save(SaveData data)
+    {
+        data.Write(Items.Count);
+        for(int i=0 ; i < Items.Count; i++)
+        {
+            var it = Items[i];
+            data.Write(it.IndexId);
+            data.Write(it.ObjId);
+            it.Save(data);
+        }
+    }
+    */
     public virtual void Load(SaveData data)
     {
         int count = data;
@@ -81,6 +96,14 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
     public virtual List<T> GetList()
     {
         return Items.ToList();
+    }
+    public virtual void Clear()
+    {
+        foreach(var i in GetList())
+        {
+            i.Delete();
+        }
+        Items.Clear();
     }
     [SerializeField]protected List<T> Items = new List<T>();
 }

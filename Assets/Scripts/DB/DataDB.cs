@@ -10,10 +10,10 @@ public abstract class DataDB<T> : SingletonBehavior<DataDB<T>> where T : SOData
         idDic = new BiDictionary<string, ushort>();
         itemDic = new Dictionary<ushort, T>();
         ushort id = 1;
-        foreach(var i in items)
+        foreach (var i in items)
         {
-            idDic.Add(i.m_Id,id);
-            itemDic.Add(id,i);
+            idDic.Add(i.m_Id, id);
+            itemDic.Add(id, i);
             id++;
         }
     }
@@ -27,7 +27,7 @@ public abstract class DataDB<T> : SingletonBehavior<DataDB<T>> where T : SOData
     }
     public virtual T GetData(ushort id)
     {
-        if(!itemDic.ContainsKey(id)) return null;
+        if (!itemDic.ContainsKey(id)) return null;
         return itemDic[id];
     }
     public virtual string ConvertId(ushort id)
@@ -38,7 +38,7 @@ public abstract class DataDB<T> : SingletonBehavior<DataDB<T>> where T : SOData
     {
         return idDic.Get(id);
     }
-    protected BiDictionary<string,ushort> idDic;
+    protected BiDictionary<string, ushort> idDic;
     protected Dictionary<ushort, T> itemDic;
     [SerializeField] protected List<T> items;
 }

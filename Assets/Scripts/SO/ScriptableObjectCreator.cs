@@ -10,7 +10,7 @@ using System.Linq;
 /// </summary>
 public class ScriptableObjectCreator : EditorWindow
 {
-    
+
     [MenuItem("Assets/Create/Game Asset...")]
     private static void Open()
     {
@@ -18,40 +18,40 @@ public class ScriptableObjectCreator : EditorWindow
     }
     private void OnEnable()
     {
-    types = AppDomain.CurrentDomain
-        .GetAssemblies()
-        .SelectMany(x => x.GetTypes())
-        .Where(t =>
-            t.IsSubclassOf(typeof(SOData)) &&
-            !t.IsAbstract)
-        .OrderBy(t => t.Name)
-        .ToArray();
+        types = AppDomain.CurrentDomain
+            .GetAssemblies()
+            .SelectMany(x => x.GetTypes())
+            .Where(t =>
+                t.IsSubclassOf(typeof(SOData)) &&
+                !t.IsAbstract)
+            .OrderBy(t => t.Name)
+            .ToArray();
     }
     public Type[] types;
-    
 
-private void OnGUI()
-{
-    scroll = EditorGUILayout.BeginScrollView(scroll);
 
-    foreach (var type in types)
+    private void OnGUI()
     {
-        if (GUILayout.Button(type.Name))
+        scroll = EditorGUILayout.BeginScrollView(scroll);
+
+        foreach (var type in types)
         {
-            CreateAsset(type);
+            if (GUILayout.Button(type.Name))
+            {
+                CreateAsset(type);
+            }
         }
+
+        EditorGUILayout.EndScrollView();
     }
+    private static void CreateAsset(Type type)
+    {
+        var asset = ScriptableObject.CreateInstance(type);
 
-    EditorGUILayout.EndScrollView();
-}
-private static void CreateAsset(Type type)
-{
-    var asset = ScriptableObject.CreateInstance(type);
-
-    ProjectWindowUtil.CreateAsset(
-        asset,
-        $"New {type.Name}.asset");
-}
-private Vector2 scroll;
+        ProjectWindowUtil.CreateAsset(
+            asset,
+            $"New {type.Name}.asset");
+    }
+    private Vector2 scroll;
 }
 #endif

@@ -8,21 +8,11 @@ public class ReplayHamburger : Singleton<ReplayHamburger>
     }
     public void Save(int frame, SaveData data)
     {
-        if(saveDic.Count > frame)
-        {
-            saveDic[frame] = data;
-        }
-        else
-        {
-            while(saveDic.Count <= frame)
-            {
-                saveDic.Add(data);
-            }
-        }
+        saveDic[frame] = data;
     }
     public SaveData Load(int frame)
     {
         return saveDic[frame];
     }
-    private List<SaveData> saveDic = new List<SaveData>();
+    private Dictionary<int,SaveData> saveDic = new Dictionary<int,SaveData>();
 }

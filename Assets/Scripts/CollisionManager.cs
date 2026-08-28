@@ -10,9 +10,9 @@ public class CollisionManager : SingletonBehavior<CollisionManager>
     }
     public void Update()
     {
-        foreach(var c1 in List)
+        foreach (var c1 in List)
         {
-            
+
         }
     }
     public void RegisterCol(ICollision col)

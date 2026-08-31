@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22164823d4876144e9dc47bf5b24d147, type: 3}
+  m_Name: AllAtkUp
+  m_EditorClassIdentifier: Assembly-CSharp::JustStatItemDataSO
+  m_Id: 
+  script: 
+  m_Prefab: []
+  m_grade: 0
+  m_ItemName: "\uD30C\uC6CC\uC5C5"
+  m_ItemDesc: "\uD53C\uD574\uB7C9\uC774 10% \uC99D\uAC00\uD569\uB2C8\uB2E4"
+  m_allDmgMult: 1.1
+  m_mainDmgMult: 1
+  m_subDmgMult: 1
+  m_pMoveMult: 1

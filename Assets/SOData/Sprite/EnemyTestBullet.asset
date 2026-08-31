@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EnemyTestBullet
   m_EditorClassIdentifier: Assembly-CSharp::SpriteSO
   m_Id: EnemyTestBullet
-  m_Sprite: {fileID: -4775746655399892329, guid: 41f9737ed5cd75f42915ce227ccdf6df, type: 3}
+  m_Sprite: {fileID: 3500680291411888395, guid: 22f6e7619062fef4394a19853acdc94c, type: 3}

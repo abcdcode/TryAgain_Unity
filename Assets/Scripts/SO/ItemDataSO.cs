@@ -7,14 +7,18 @@ using UnityEngine;
 public abstract class ItemDataSO : ReplaySO<Item>
 {
     [SerializeField]
-    protected MonoScript script;
+    protected string script;
     [SerializeField]protected List<GameObject> m_Prefab;
     [SerializeField]protected ItemGrade m_grade;
+    [SerializeField]protected string m_ItemName;
+    [SerializeField]protected string m_ItemDesc;
     public ItemGrade Grade => m_grade;
     public List<GameObject> Prefab => m_Prefab;
-    public Item CreateItemInstance()
+    public string ItemName => m_ItemName;
+    public string ItemDesc => m_ItemDesc;
+    public virtual Item CreateItemInstance()
     {
-        var t = script.GetClass();
+        var t = Type.GetType(script);
         return (Item)Activator.CreateInstance(t);
     }
 }

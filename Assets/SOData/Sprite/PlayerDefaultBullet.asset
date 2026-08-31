@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerDefaultBullet
   m_EditorClassIdentifier: Assembly-CSharp::SpriteSO
   m_Id: PlayerDefaultBullet
-  m_Sprite: {fileID: 8140593895237489223, guid: 99690b36c01ad7343a4bce51ad6d19aa, type: 3}
+  m_Sprite: {fileID: -5503844894904110151, guid: 7253fcb5652a1db489a749726cc48aa4, type: 3}

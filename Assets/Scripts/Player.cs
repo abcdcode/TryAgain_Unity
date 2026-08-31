@@ -53,7 +53,7 @@ public class Player : ReplayMono, IHitable
         var b = BulletContainer.Instance.Create(BulletDB.PlayerDefaultBullet,true);
         b.InitPos(this.Position);
         b.Angle = 0;
-        b.SetSize(new Vector2(100,100));
+        b.SetSize(new Vector2(60,60));
         b.damageInfo = new DamageInfo(){dmg = 10, faction = FactionEnum.Player};
     }
     public override void Delete()

@@ -13,4 +13,8 @@ public class JustStatItem : PassiveItem
     {
         return Jata.SubDmgMult;
     }
+    public override float MoveSpeedMult()
+    {
+        return Jata.MoveMult;
+    }
 }

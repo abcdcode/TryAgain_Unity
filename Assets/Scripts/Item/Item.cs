@@ -33,6 +33,14 @@ public abstract class Item : StatModifier, IReplayObj
         OnRelease();
         Inventory.Instance.Delete(this);
     }
+    public virtual string ItemName()
+    {
+        return Data.ItemName;
+    }
+    public virtual string ItemDesc()
+    {
+        return Data.ItemDesc;
+    }
 
     public Player Owner{get;private set;}
     public ItemDataSO Data{get;private set;}

@@ -7,6 +7,7 @@ public class Enemy : ReplayMono, IHitable
         EnemyData = data;
         EnemyData.Init(this);
         HP = EnemyData.Hp;
+        Animator?.SetAnim(1,true);
     }
     public void AIInit(EnemyAIDataSO aiData)
     {

@@ -19,6 +19,7 @@ public class Bullet : ReplayMono
         m_Data = d;
         m_rederer.sprite = m_Data.m_spriteSO.m_Sprite;
         m_Data.Init(this);
+        if(damageInfo == null) damageInfo = new DamageInfo();
     }
     public void InitPos(Vector2 pos)
     {
@@ -32,6 +33,7 @@ public class Bullet : ReplayMono
         var id = BulletDB.Instance.ConvertId(m_Data.m_Id);
         data.Write(id);
         m_Data.Save(data,this);
+        damageInfo.Save(data);
         prevPos = Position;
     }
     public override void Load(SaveData data)
@@ -45,6 +47,7 @@ public class Bullet : ReplayMono
             m_Data = newData;
         }
         m_Data.Load(data,this);
+        damageInfo.Load(data);
     }
     public override void GameUpdate()
     {
@@ -76,8 +79,7 @@ public class Bullet : ReplayMono
         }
     }
     public DamageInfo damageInfo;
-    public FactionEnum Faction{get;set;}
-    private Vector2 prevPos;
+    [SerializeField]private Vector2 prevPos;
     public BulletSO m_Data;
 }
 public enum BulletCoolEnum

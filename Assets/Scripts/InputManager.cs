@@ -46,16 +46,6 @@ public class InputManager : SingletonBehavior<InputManager>
         EnableAll(m_ChangeAction);
     }
 
-    private void OnDestroy()
-    {
-        DisableAll(m_MoveAction);
-        DisableAll(m_AttackAction);
-        DisableAll(m_ReplayAction);
-        DisableAll(m_ESCAction);
-        DisableAll(m_ActiveAction);
-        DisableAll(m_ChangeAction);
-    }
-
     private void Update()
     {
         m_tInputInfo.MoveDir = ReadMove();

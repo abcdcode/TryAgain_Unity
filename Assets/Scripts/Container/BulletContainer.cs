@@ -11,7 +11,7 @@ public class BulletContainer : ReplayObjContainer<Bullet>
         
         foreach(var b in BulletContainer.Instance.GetList())
         {
-            if(b.Faction == a.Faction) continue;
+            if(b.damageInfo.faction == a.Faction) continue;
             if(Bullet.HitCheck(b,a.Obj.Position,a.Obj.GetSize().x/2))
             {
                 a.TakeDamage(b.damageInfo);
@@ -30,7 +30,7 @@ public class BulletContainer : ReplayObjContainer<Bullet>
         foreach(var b in GetNearCellBullets(XX,YY))
         {
             if(!b.isActiveAndEnabled) continue;
-            if(b.Faction == a.Faction) continue;
+            if(b.damageInfo.faction == a.Faction) continue;
             if(Bullet.HitCheck(b,aPos,a.Obj.GetSize().x/2))
             {
                 a.TakeDamage(b.damageInfo);
@@ -78,6 +78,11 @@ public class BulletContainer : ReplayObjContainer<Bullet>
     {
         base.GameUpdate();
         SettingCell();
+    }
+    public override void Clear()
+    {
+        base.Clear();
+        ClearCell();
     }
     private static void ClearCell()
     {

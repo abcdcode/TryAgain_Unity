@@ -5,8 +5,19 @@ using UnityEngine;
 /// </summary>
 public abstract class ReplayMono : GameMono, IReplayObj, ICoolOwner
 {
-    public int IndexId {get;set;}
+    public int IndexId {
+        get
+        {
+            return m_IndexId;
+        }
+        set
+        {
+            m_IndexId = value;
+        }
+    }
     public string ObjId {get;set;}
+    [SerializeField]protected int m_IndexId;
+    [SerializeField]protected string m_ObjId;
     public virtual void Awake()
     {
         m_CoolTimer = new CoolTimer(this);

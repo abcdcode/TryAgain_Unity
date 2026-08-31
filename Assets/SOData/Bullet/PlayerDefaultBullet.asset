@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DefaultBulletSO
   m_Id: PlayerDefaultBullet
   m_spriteSO: {fileID: 11400000, guid: 51379d163ae446c4eb7e6c04b578dc49, type: 2}
-  m_bulletSize: 0
+  m_bulletSize: 1
   m_time: 3
   m_speed: 3000

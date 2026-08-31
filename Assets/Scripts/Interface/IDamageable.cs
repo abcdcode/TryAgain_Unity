@@ -1,12 +1,16 @@
+using System;
+using UnityEngine;
+
 public interface IDamageable
 {
     public void TakeDamage(DamageInfo dmg);
     public FactionEnum Faction{get;}
 
 }
+[Serializable]
 public class DamageInfo : IReplayable
 {
-    private float m_dmg;
+    [SerializeField]private float m_dmg;
     public float dmg{
         get
         {
@@ -14,12 +18,10 @@ public class DamageInfo : IReplayable
         }
         set
         {
-            if(m_dmg == value) return;
             m_dmg = value;
-            m_IsSave = true;
         }
     }
-    private FactionEnum m_faction;
+    [SerializeField]private FactionEnum m_faction;
     public FactionEnum faction{
         get
         {
@@ -27,12 +29,9 @@ public class DamageInfo : IReplayable
         }
         set
         {
-            if(m_faction == value) return;
             m_faction = value;
-            m_IsSave = true;
         }
     }
-    private bool m_IsSave = true;
 
     public void GameUpdate()
     {
@@ -44,18 +43,13 @@ public class DamageInfo : IReplayable
 
     public void Load(SaveData data)
     {
-        m_IsSave = data;
-        if(!m_IsSave) return;
         dmg = data;
         faction = (FactionEnum)(byte)data;
     }
 
     public void Save(SaveData data)
     {
-        data.Write(m_IsSave);
-        if(!m_IsSave) return;
         data.Write(dmg);
         data.Write((byte)faction);
-        m_IsSave = false;
     }
 }

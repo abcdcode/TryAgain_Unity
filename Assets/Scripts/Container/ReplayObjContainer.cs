@@ -1,14 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework.Internal.Commands;
 using UnityEngine;
 
 public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContainer<T>>, IReplayable where T : IReplayObj
 {
-    
+    public override void Awake()
+    {
+        base.Awake();
+        Clear();
+    }
     public virtual void Save(SaveData data)
     {
         data.Write(Items.Count);
-        for(int i=0 ; i < Items.Count; i++)
+        Items.Sort(CompareItem);
+        for (int i = 0; i < Items.Count; i++)
         {
             var it = Items[i];
             data.Write(it.IndexId);
@@ -16,7 +22,15 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
             it.Save(data);
         }
     }
-    
+    public int CompareItem(T x, T y)
+    {
+        if (x.IndexId > y.IndexId)
+        {
+            return 1;
+        }
+        return -1;
+    }
+
     /*
     public virtual void Save(SaveData data)
     {
@@ -33,35 +47,45 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
     public virtual void Load(SaveData data)
     {
         int count = data;
-        List<int> list = new ();
-        for(int i = 0 ; i < count; i++)
+        List<T> list = GetList();
+        int arrayIndex = 0;
+        for (int i = 0; i < count; i++)
         {
             int indexId = data;
             ushort objId = data;
-            T item;
-            item = Items.Count > i && Items[i].IndexId == indexId ? Items[i] : Items.Find(x => x.IndexId == indexId);
-            if(item != null)
+            bool isLoad = false;
+            while (arrayIndex < Items.Count)
             {
-                item.Load(data);
+                var it = Items[arrayIndex];
+                var itIndex = it.IndexId;
+                if (itIndex < indexId)
+                {
+                    arrayIndex += 1;
+                    continue;
+                }
+                if (itIndex == indexId)
+                {
+                    arrayIndex += 1;
+                    it.Load(data);
+                    isLoad = true;
+                    list.Remove(it);
+                    break;
+                }
+                if (itIndex > indexId)
+                {
+                    break;
+                }
             }
-            else
+            if (isLoad)
             {
-                item = Create(ConvertId(objId),false);
-                item.IndexId = indexId;
-                item.ObjId = ConvertId(objId);
-                item.Load(data);
+                continue;
             }
-            list.Add(indexId);
+            var item = Create(ConvertId(objId), false);
+            item.IndexId = indexId;
+            item.ObjId = ConvertId(objId);
+            item.Load(data);
         }
-        var d = new List<T>();
-        foreach(var i in Items)
-        {
-            if(!list.Contains(i.IndexId))
-            {
-                d.Add(i);
-            }
-        }
-        foreach(var i in d)
+        foreach (var i in list)
         {
             i.Delete();
         }
@@ -73,11 +97,11 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
     public virtual void Delete(T t)
     {
         Items.Remove(t);
-            if(t is ReplayMono mono)
-            {
-                Destroy(mono.gameObject);
-            }
-        
+        if (t is ReplayMono mono)
+        {
+            Destroy(mono.gameObject);
+        }
+
     }
     public abstract ushort ConvertId(string id);
     public abstract string ConvertId(ushort id);
@@ -99,11 +123,11 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
     }
     public virtual void Clear()
     {
-        foreach(var i in GetList())
+        foreach (var i in GetList())
         {
             i.Delete();
         }
         Items.Clear();
     }
-    [SerializeField]protected List<T> Items = new List<T>();
+    [SerializeField] protected List<T> Items = new List<T>();
 }

@@ -23,7 +23,7 @@ public class EnemyAI_MoveLeftAndAttack : EnemyAIDataSO
             var b = BulletContainer.Instance.Create(BulletDB.EnemyTestBullet, true);
             b.InitPos(obj.Position);
             b.LookAt(GameManager.Instance.CurPlayer.Position);
-            b.Faction = FactionEnum.Enemy;
+            b.damageInfo = new DamageInfo(){dmg = 1, faction = FactionEnum.Enemy};
             b.SetSize(new Vector2(30, 30));
             obj.m_CoolTimer.SetCool(Shoot, m_shotCool, 0, true);
         }

@@ -50,6 +50,10 @@ public class Enemy : ReplayMono, IHitable
     }
     public void TakeDamage(DamageInfo dmg)
     {
+        if(dmg == null)
+        {
+            ReplayDebug.Log("Null DMG Check!");
+        }
         //ReplayDebug.Log("TakeDamage!!!");
         HP -= dmg.dmg;
         if(HP <= 0)

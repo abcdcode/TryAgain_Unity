@@ -28,12 +28,36 @@ public class GameManager : SingletonBehavior<GameManager>
         WaveManager.Instance.SetTestWave();
         CurFrame = 0;
         State = GameManagerState.Playing;
+        pDeadTime = 2;
+        foreach(var c in m_ContainerList)
+        {
+            
+        }
     }
     /// <summary>
     /// 인풋 받아서 플레이 상태 결정하는 곳
     /// </summary>
     void StateCheck()
     {
+        if(pDeadTime <= 0)
+        {
+            State = GameManagerState.Pause;
+            return;
+        }
+        if(CurPlayer.IsDead &&  State == GameManagerState.Playing)
+        {
+            pDeadTime -= Time.deltaTime;
+            if(pDeadTime <= 0)
+            {
+                MainUIManager.Instance.OpenGameOver();
+                State = GameManagerState.Pause;
+                return;
+            }
+        }
+        else
+        {
+            pDeadTime = 2;
+        }
         var inputinfo = InputManager.Instance.InputInfo;
         if (inputinfo.OnESCDown)
         {
@@ -49,6 +73,7 @@ public class GameManager : SingletonBehavior<GameManager>
             State = GameManagerState.Playing;
         }
     }
+    private float pDeadTime;
     void Update()
     {
         var v = System.DateTime.Now.Millisecond;
@@ -59,7 +84,7 @@ public class GameManager : SingletonBehavior<GameManager>
         }
         if (State == GameManagerState.Pause)
         {
-
+            
         }
         if (State == GameManagerState.Replay)
         {

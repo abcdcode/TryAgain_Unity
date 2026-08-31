@@ -16,6 +16,7 @@ public class Player : ReplayMono, IHitable
         base.Awake();
         this.SetSize(new Vector2(100,100));
         Stat = new PlayerStat();
+        m_CoolTimer.SetCool(AtkCool,Stat.GetAtkSpeed(),0,true);
     }
     public override void Save(SaveData data)
     {
@@ -41,7 +42,7 @@ public class Player : ReplayMono, IHitable
         //방향키 인풋
         var MoveDir = input.MoveDir;
         //이동
-        this.Position = CalcUtils.ScreenClamp(this.Position+MoveDir.normalized*1000*Time.deltaTime,this.GetSize());
+        this.Position = CalcUtils.ScreenClamp(this.Position+MoveDir.normalized*Stat.GetMoveSpeed()*Time.deltaTime,this.GetSize());
         var isAtk = input.OnAttack;
         if(isAtk)
         {
@@ -50,14 +51,17 @@ public class Player : ReplayMono, IHitable
     }
     public void Shoot()
     {
+        if(!m_CoolTimer.IsCoolComp(AtkCool)) return;
         var b = BulletContainer.Instance.Create(BulletDB.PlayerDefaultBullet,true);
         b.InitPos(this.Position);
         b.Angle = 0;
         b.SetSize(new Vector2(60,60));
         b.damageInfo = new DamageInfo(){dmg = 10, faction = FactionEnum.Player};
+        m_CoolTimer.SetCool(AtkCool,Stat.GetAtkSpeed(),0,true);
     }
     public override void Delete()
     {
     }
     public PlayerStat Stat {get;private set;}
+    private const int AtkCool = 1;
 }

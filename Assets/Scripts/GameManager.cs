@@ -29,10 +29,7 @@ public class GameManager : SingletonBehavior<GameManager>
         CurFrame = 0;
         State = GameManagerState.Playing;
         pDeadTime = 2;
-        foreach(var c in m_ContainerList)
-        {
-            
-        }
+        Inventory.Instance.Create("SpeedUp",true);
     }
     /// <summary>
     /// 인풋 받아서 플레이 상태 결정하는 곳

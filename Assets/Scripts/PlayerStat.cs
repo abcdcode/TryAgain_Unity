@@ -4,15 +4,25 @@ using System.Collections.Generic;
 public class PlayerStat
 {
     private const float BaseSpeed = 1000;
-    private T StatModifying<T>(T def, List<Item> list, Func<T,Item,T> func)
+    private const float AtkSpeed = 1;
+    public float GetMoveSpeed()
     {
-        foreach(var l in list)
+        var result = BaseSpeed;
+        foreach(var i in Inven)
         {
-            def = func(def,l);
+            result *= i.MoveSpeedMult();
         }
-        return def;
+        return result;
     }
+    public float GetAtkSpeed()
+    {
+        var result = AtkSpeed;
+        foreach(var i in Inven)
+        {
+            result *= i.AtkSpeedMult();
+        }
+        return result;
+    }
+
     public List<Item> Inven => Inventory.Instance.GetList();
-    public float MoveSpeed => BaseSpeed * StatModifying(1f,Inven,(t,l) => t * l.MoveSpeedMult());
-    public float AllDamage => 1 * StatModifying(1f,Inven,(t,l) => t * l.AllDamageMult());
 }

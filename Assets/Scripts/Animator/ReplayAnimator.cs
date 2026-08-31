@@ -66,7 +66,7 @@ public class ReplayAnimator :GameMono,IReplayable
             m_curClip = m_clips.Find(x => x.m_clipId == curclip);
         }
         int curA = data;
-        if(curA != curAction)
+        if(curA != curAction && curA != -1)
         {
             curAction = curA;
             var a = m_curClip.doAction[curA];

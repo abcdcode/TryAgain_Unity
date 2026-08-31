@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public abstract class Item : StatModifier, IReplayObj
 {
     public virtual void GameUpdate()
@@ -40,6 +42,10 @@ public abstract class Item : StatModifier, IReplayObj
     public virtual string ItemDesc()
     {
         return Data.ItemDesc;
+    }
+    public virtual Sprite ItemSprite()
+    {
+        return Data.ItemSprite;
     }
 
     public Player Owner{get;private set;}

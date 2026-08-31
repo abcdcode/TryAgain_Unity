@@ -32,6 +32,10 @@ public abstract class StatModifier
     {
         return 1;
     }
+    public virtual float AtkSpeedMult()
+    {
+        return 1;
+    }
     /// <summary>
     /// 공격 적중 시 효과
     /// </summary>

@@ -12,10 +12,12 @@ public abstract class ItemDataSO : ReplaySO<Item>
     [SerializeField]protected ItemGrade m_grade;
     [SerializeField]protected string m_ItemName;
     [SerializeField]protected string m_ItemDesc;
+    [SerializeField]protected Sprite m_sprite;
     public ItemGrade Grade => m_grade;
     public List<GameObject> Prefab => m_Prefab;
     public string ItemName => m_ItemName;
     public string ItemDesc => m_ItemDesc;
+    public Sprite ItemSprite => m_sprite;
     public virtual Item CreateItemInstance()
     {
         var t = Type.GetType(script);

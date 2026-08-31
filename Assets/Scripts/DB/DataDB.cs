@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class DataDB<T> : SingletonBehavior<DataDB<T>> where T : SOData
@@ -38,6 +39,10 @@ public abstract class DataDB<T> : SingletonBehavior<DataDB<T>> where T : SOData
     public virtual ushort ConvertId(string id)
     {
         return idDic.Get(id);
+    }
+    public virtual List<T> GetList()
+    {
+        return items.ToList();
     }
     protected BiDictionary<string, ushort> idDic;
     //protected Dictionary<ushort, T> itemDic;

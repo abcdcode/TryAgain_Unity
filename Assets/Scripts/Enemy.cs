@@ -59,6 +59,9 @@ public class Enemy : ReplayMono, IHitable
         HP -= dmg.dmg;
         if(HP <= 0)
         {
+            var e = EffectContainer.Instance.Create("EnemyDead",true);
+            e.SetSize(this.GetSize());
+            e.Position = this.Position;
             Delete();
         }
     }

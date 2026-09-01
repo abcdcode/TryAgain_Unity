@@ -64,6 +64,10 @@ public class GameManager : SingletonBehavior<GameManager>
         if (inputinfo.OnESCDown)
         {
             State = State == GameManagerState.Pause ? GameManagerState.Playing : GameManagerState.Pause;
+            if(State == GameManagerState.Pause)
+            {
+                
+            }
         }
         if (State == GameManagerState.Pause) return;
         if (inputinfo.OnReplay)

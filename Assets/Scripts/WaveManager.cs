@@ -13,7 +13,13 @@ public class WaveManager : SingletonBehavior<WaveManager>, IReplayable
     public void SetWave(Wave w)
     {
         CurWave =w;
+        CurWave.DataList.Sort(WaveSort);
         WaveStart();
+    }
+    public int WaveSort(WaveData a, WaveData b)
+    {
+        if(a.Time > b.Time) return 1;
+        return -1;
     }
     public void WaveStart()
     {

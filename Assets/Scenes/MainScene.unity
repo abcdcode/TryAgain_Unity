@@ -1350,7 +1350,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37355bccaede12142a3ed0a9a3bd33ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainUIManager
+  m_ESCManu: {fileID: 0}
   m_GameOverUI: {fileID: 2101416879}
+  m_WaveText: {fileID: 157337585}
 --- !u!4 &1582059387
 Transform:
   m_ObjectHideFlags: 0

@@ -58,6 +58,8 @@ public class StageManager : SingletonBehavior<StageManager>, IReplayable
     public StageState SState{get;set;}
     public int CurWaveNum{get;private set;}
     public int CurStage{get;private set;}
+    public const int LastWave = 4;
+    public const int LastStage = 1;
 
 }
 public enum StageState

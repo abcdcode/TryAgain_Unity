@@ -28,12 +28,14 @@ public class Player : ReplayMono, IHitable
     {
         base.Save(data);
         data.Write(IsDead);
+        data.Write(CurActiveIndex);
     }
     public override void Load(SaveData data)
     {
         base.Load(data);
         IsDead = data;
         gameObject.SetActive(!IsDead);
+        CurActiveIndex = data;
     }
     public override void GameUpdate()
     {
@@ -68,6 +70,7 @@ public class Player : ReplayMono, IHitable
     public override void Delete()
     {
     }
+    public int CurActiveIndex{get;private set;}
     public PlayerStat Stat { get; private set; }
     private const int AtkCool = 1;
 }

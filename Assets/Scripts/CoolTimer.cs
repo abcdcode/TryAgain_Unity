@@ -105,11 +105,11 @@ public class CoolTimer : IReplayable
                 coolDic[key].Load(data);
             }
         }
-        foreach(var key in coolDic.Keys)
+        foreach(var key in coolDic.ToList())
         {
-            if(!lkeys.Contains(key))
+            if(!lkeys.Contains(key.Key))
             {
-                coolDic.Remove(key);
+                coolDic.Remove(key.Key);
             }
         }
     }

@@ -56,7 +56,7 @@ public class Player : ReplayMono, IHitable
         b.InitPos(this.Position);
         b.Angle = 0;
         b.SetSize(new Vector2(60,60));
-        b.damageInfo = new DamageInfo(){dmg = 10, faction = FactionEnum.Player};
+        b.damageInfo = new DamageInfo(){dmg = Stat.GetMainDmg(), faction = FactionEnum.Player};
         m_CoolTimer.SetCool(AtkCool,Stat.GetAtkSpeed(),0,true);
     }
     public override void Delete()

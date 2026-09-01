@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22164823d4876144e9dc47bf5b24d147, type: 3}
-  m_Name: AllAtkUp
+  m_Name: AtkSpeedUp
   m_EditorClassIdentifier: Assembly-CSharp::JustStatItemDataSO
-  m_Id: PowerUp
+  m_Id: AtkSpeedUp
   script: JustStatItem
   m_Prefab: []
   m_grade: 0
-  m_ItemName: "\uD30C\uC6CC\uC5C5"
-  m_ItemDesc: "\uD53C\uD574\uB7C9\uC774 10% \uC99D\uAC00\uD569\uB2C8\uB2E4"
-  m_sprite: {fileID: 21300000, guid: 8e5a3df2309599d42a812baca6503547, type: 3}
-  m_allDmgMult: 1.1
+  m_ItemName: "\uACF5\uC18D\uC99D\uAC00"
+  m_ItemDesc: "\uAE30\uBCF8\uACF5\uACA9\uC18D\uB3C4\uAC00 20% \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  m_sprite: {fileID: 21300000, guid: ebd8073fb4741c64b9043c1d9366dd38, type: 3}
+  m_allDmgMult: 1
   m_mainDmgMult: 1
   m_subDmgMult: 1
   m_pMoveMult: 1
-  m_atkSpeed: 1
+  m_atkSpeed: 1.2

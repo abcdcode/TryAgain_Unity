@@ -11,7 +11,10 @@ public class StageManager : SingletonBehavior<StageManager>, IReplayable
     public void LateGameUpdate()
     {
     }
-
+    public void SetWave()
+    {
+        
+    }
     public void Load(SaveData data)
     {
         ReplayLimit = data;
@@ -22,4 +25,10 @@ public class StageManager : SingletonBehavior<StageManager>, IReplayable
         data.Write(ReplayLimit);
     }
     public int ReplayLimit{get;set;}
+
+}
+public enum StageState
+{
+    Playing,
+    Reward
 }

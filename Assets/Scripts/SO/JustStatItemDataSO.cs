@@ -1,6 +1,7 @@
 using UnityEngine;
 public class JustStatItemDataSO : PassiveItemDataSO
 {
+
     [SerializeField]protected float m_allDmgMult = 1;
     [SerializeField]protected float m_mainDmgMult = 1;
     [SerializeField]protected float m_subDmgMult = 1;
@@ -11,4 +12,9 @@ public class JustStatItemDataSO : PassiveItemDataSO
     public float SubDmgMult => m_subDmgMult;
     public float MoveMult => m_pMoveMult;
     public float AtkSpeed => m_atkSpeed;
+    public override void SODataInit()
+    {
+        base.SODataInit();
+        this.script = "JustStatItem";
+    }
 }

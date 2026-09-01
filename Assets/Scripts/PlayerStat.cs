@@ -4,7 +4,8 @@ using System.Collections.Generic;
 public class PlayerStat
 {
     private const float BaseSpeed = 1000;
-    private const float AtkSpeed = 1;
+    private const float AtkSpeed = 0.4f;
+    private const float DefaultDmg = 10;
     public float GetMoveSpeed()
     {
         var result = BaseSpeed;
@@ -23,6 +24,15 @@ public class PlayerStat
         }
         return result;
     }
-
+    public float GetMainDmg()
+    {
+        var result = DefaultDmg;
+        foreach(var i in Inven)
+        {
+            result *= i.AllDamageMult();
+            result *= i.MainDamageMult();
+        }
+        return result;
+    }
     public List<Item> Inven => Inventory.Instance.GetList();
 }

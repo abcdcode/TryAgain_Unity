@@ -47,7 +47,10 @@ public class ScriptableObjectCreator : EditorWindow
     private static void CreateAsset(Type type)
     {
         var asset = ScriptableObject.CreateInstance(type);
-
+        if(asset is SOData so)
+        {
+            so.SODataInit();
+        }
         ProjectWindowUtil.CreateAsset(
             asset,
             $"New {type.Name}.asset");

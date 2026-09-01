@@ -7,7 +7,7 @@ public class WaveManager : SingletonBehavior<WaveManager>, IReplayable
 {
     public void SetTestWave()
     {
-        CurWave = WavePreset.GetStage1Wave();
+        CurWave = WavePreset.GetStage1Wave()[0];
         WaveStart();
     }
     public void WaveStart()
@@ -31,10 +31,20 @@ public class WaveManager : SingletonBehavior<WaveManager>, IReplayable
             }
         }
         m_time += Time.deltaTime;
+        if(CheckWaveEnd())
+        {
+            CurWave = null;
+        }
     }
     public void LateGameUpdate()
     {
         
+    }
+    private bool CheckWaveEnd()
+    {
+        if(m_wIndex < CurWave.DataList.Count) return false;
+        if(EnemyContainer.Instance.GetList().Count > 0) return false;
+        return true;
     }
 
     public void Load(SaveData data)
@@ -91,13 +101,39 @@ public class WaveData
 
 public static class WavePreset
 {
-    public static Wave GetStage1Wave()
+    public static List<Wave> GetStage1Wave()
+    {
+        List<Wave> waves = new List<Wave>
+        {
+            Stage1_1Wave(),
+            Stage1_2Wave()
+        };
+        return waves;
+    }
+    private static Wave Stage1_1Wave()
     {
         Wave result = new Wave();
-        for(int i = 0; i < 100; i ++)
+        for(int i = 0; i < 10; i++)
         {
             var vec = new Vector2(1200,SeedManager.Instance.GetFloat(-500,500));
-            WaveData data = new(EnemyDB.TestEnemy,vec,EnemyAIDB.MoveAttack1,i*0.1f);
+            WaveData data = new(EnemyDB.TestEnemy,vec,EnemyAIDB.MoveAttack1,i*0.5f);
+            result.DataList.Add(data);
+        }
+        return result;
+    }
+    private static Wave Stage1_2Wave()
+    {
+        Wave result = new Wave();
+        for(int i = 0; i < 7; i++)
+        {
+            var vec = new Vector2(1200,SeedManager.Instance.GetFloat(-500,500));
+            WaveData data = new(EnemyDB.TestEnemy,vec,EnemyAIDB.MoveAttack1,i*0.6f);
+            result.DataList.Add(data);
+        }
+        for(int i = 0; i < 10; i++)
+        {
+            var vec = new Vector2(1200,SeedManager.Instance.GetFloat(-500,500));
+            WaveData data = new(EnemyDB.TestEnemy,vec,EnemyAIDB.Kamikaze,i*0.3f);
             result.DataList.Add(data);
         }
         return result;

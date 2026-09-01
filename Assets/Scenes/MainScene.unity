@@ -1058,6 +1058,7 @@ GameObject:
   - component: {fileID: 1368819179}
   - component: {fileID: 1368819180}
   - component: {fileID: 1368819181}
+  - component: {fileID: 1368819182}
   m_Layer: 0
   m_Name: DBContainer
   m_TagString: Untagged
@@ -1155,6 +1156,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d21ab59e4c352fe448a8624ce508fee4, type: 2}
   - {fileID: 11400000, guid: 711a34a2cf2587043bf3a877ec5e5f38, type: 2}
   - {fileID: 11400000, guid: 4b54d6b0b2a3d494d82fb5ede647e009, type: 2}
+--- !u!114 &1368819182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368819175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07f771a40f9bf5499aa82b3cd458f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EffectDB
+  items:
+  - {fileID: 11400000, guid: 99af6139141862049aa35389d303f338, type: 2}
 --- !u!1 &1531553892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,6 +1512,7 @@ GameObject:
   - component: {fileID: 1710443394}
   - component: {fileID: 1710443396}
   - component: {fileID: 1710443397}
+  - component: {fileID: 1710443402}
   - component: {fileID: 1710443401}
   - component: {fileID: 1710443399}
   - component: {fileID: 1710443398}
@@ -1625,6 +1641,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a1b77f4db877a4eaef7830cc49ac60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
+--- !u!114 &1710443402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710443391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c4d33ff3eaa494d84c6e8f1e2b754c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EffectContainer
+  Items: []
 --- !u!1 &1990215072
 GameObject:
   m_ObjectHideFlags: 0

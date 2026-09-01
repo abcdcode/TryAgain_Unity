@@ -12,10 +12,12 @@ public abstract class Item : StatModifier, IReplayObj
 
     public virtual void Load(SaveData data)
     {
+        Data.Load(data,this);
     }
 
     public virtual void Save(SaveData data)
     {
+        Data.Save(data,this);
     }
     public virtual void Init(ItemDataSO data)
     {

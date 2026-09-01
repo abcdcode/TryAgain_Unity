@@ -41,6 +41,7 @@ public class UIRewardList : SingletonBehavior<UIRewardList>
     {
         CloseSlots();
         Inventory.Instance.Create(item.m_Id,true);
+        StageManager.Instance.PickReward();
     }
     [SerializeField]private GameObject m_prefab;
     [SerializeField]private List<UIRewardSlot> slots;

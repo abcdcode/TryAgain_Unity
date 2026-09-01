@@ -10,6 +10,11 @@ public class WaveManager : SingletonBehavior<WaveManager>, IReplayable
         CurWave = WavePreset.GetStage1Wave()[0];
         WaveStart();
     }
+    public void SetWave(Wave w)
+    {
+        CurWave =w;
+        WaveStart();
+    }
     public void WaveStart()
     {
         m_time = 0;
@@ -34,6 +39,7 @@ public class WaveManager : SingletonBehavior<WaveManager>, IReplayable
         if(CheckWaveEnd())
         {
             CurWave = null;
+            StageManager.Instance.EndWave();
         }
     }
     public void LateGameUpdate()
@@ -113,7 +119,7 @@ public static class WavePreset
     private static Wave Stage1_1Wave()
     {
         Wave result = new Wave();
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < 5; i++)
         {
             var vec = new Vector2(1200,SeedManager.Instance.GetFloat(-500,500));
             WaveData data = new(EnemyDB.TestEnemy,vec,EnemyAIDB.MoveAttack1,i*0.5f);

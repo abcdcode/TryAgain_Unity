@@ -30,12 +30,17 @@ public class GameManager : SingletonBehavior<GameManager>
         State = GameManagerState.Playing;
         pDeadTime = 2;
         Inventory.Instance.Create("SpeedUp",true);
+        StageManager.Instance.StageInit(1);
     }
     /// <summary>
     /// 인풋 받아서 플레이 상태 결정하는 곳
     /// </summary>
     void StateCheck()
     {
+        if(StageManager.Instance.SState == StageState.Reward)
+        {
+            State = GameManagerState.Pause;
+        }
         if(pDeadTime <= 0)
         {
             State = GameManagerState.Pause;
@@ -136,7 +141,7 @@ public class GameManager : SingletonBehavior<GameManager>
     }
     void Load()
     {
-        if (CurFrame > 0)
+        if (CurFrame > StageManager.Instance.ReplayLimit)
         {
             CurFrame -= 1;
         }

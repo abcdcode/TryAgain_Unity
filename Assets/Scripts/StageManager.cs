@@ -46,7 +46,7 @@ public class StageManager : SingletonBehavior<StageManager>, IReplayable
         SState = StageState.Reward;
         var reward = ItemDB.GetReward(3,ItemGrade.Normal);
         UIRewardList.Instance.SetReward(reward);
-        ReplayLimit = GameManager.Instance.CurFrame;
+        ReplayLimit = GameManager.Instance.CurFrame+1;
     }
     public void PickReward()
     {
@@ -72,8 +72,8 @@ public class StageManager : SingletonBehavior<StageManager>, IReplayable
         data.Write(waveEnded);
         data.Write(nextDelay);
     }
-    private bool waveEnded;
-    private float nextDelay;
+    [SerializeField]private bool waveEnded;
+    [SerializeField]private float nextDelay;
     private List<Wave> m_Wave;
     public int ReplayLimit{get;set;}
     public StageState SState{get;set;}

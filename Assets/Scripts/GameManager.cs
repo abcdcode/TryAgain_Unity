@@ -29,7 +29,7 @@ public class GameManager : SingletonBehavior<GameManager>
         CurFrame = 0;
         State = GameManagerState.Playing;
         pDeadTime = 2;
-        Inventory.Instance.Create("BOMB",true);
+        //Inventory.Instance.Create("MultiShot",true);
         StageManager.Instance.StageInit(1);
     }
     /// <summary>

@@ -11,7 +11,7 @@ public abstract class ItemDataSO : ReplaySO<Item>
     [SerializeField]protected List<GameObject> m_Prefab;
     [SerializeField]protected ItemGrade m_grade;
     [SerializeField]protected string m_ItemName;
-    [SerializeField]protected string m_ItemDesc;
+    [SerializeField][TextArea]protected string m_ItemDesc;
     [SerializeField]protected Sprite m_sprite;
     public ItemGrade Grade => m_grade;
     public List<GameObject> Prefab => m_Prefab;

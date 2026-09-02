@@ -24,11 +24,13 @@ public class WaveManager : SingletonBehavior<WaveManager>, IReplayable
     public void WaveStart()
     {
         m_time = 0;
+        m_wIndex = 0;
     }
     public void GameUpdate()
     {
         if(CurWave == null) return;
-        if(m_wIndex >= CurWave.DataList.Count) return;
+        if(m_wIndex == -1) return;
+        
         for(int i = m_wIndex; i < CurWave.DataList.Count;i++)
         {
             var w = CurWave.DataList[i];
@@ -45,9 +47,10 @@ public class WaveManager : SingletonBehavior<WaveManager>, IReplayable
         m_time += Time.deltaTime;
         if(CheckWaveEnd())
         {
-            //CurWave = null;
             StageManager.Instance.EndWave();
+            m_wIndex = -1;
         }
+        
     }
     public void LateGameUpdate()
     {
@@ -72,8 +75,8 @@ public class WaveManager : SingletonBehavior<WaveManager>, IReplayable
         data.Write(m_wIndex);
     }
     public Wave CurWave{get;private set;}
-    private int m_wIndex;
-    private float m_time;
+    [SerializeField]private int m_wIndex;
+    [SerializeField]private float m_time;
 }
 public class Wave : IEnumerable<WaveData>
 {

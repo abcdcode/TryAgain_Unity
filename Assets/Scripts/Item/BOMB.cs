@@ -12,6 +12,7 @@ public class BOMB : CoolActiveItem
             if(b.damageInfo.faction == FactionEnum.Player) continue;
             var ef = EffectContainer.Instance.Create("EnemyDead",true);
             ef.Position = b.Position;
+            ef.SetSize(b.GetSize());
             b.Delete();
         }
     }

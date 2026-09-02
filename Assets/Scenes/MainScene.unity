@@ -1396,6 +1396,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 711a34a2cf2587043bf3a877ec5e5f38, type: 2}
   - {fileID: 11400000, guid: 4b54d6b0b2a3d494d82fb5ede647e009, type: 2}
   - {fileID: 11400000, guid: 440b72c3e1de41f42add3d96f0fa9e4c, type: 2}
+  - {fileID: 11400000, guid: b42772fd2a87f44469848177577c0b15, type: 2}
 --- !u!114 &1368819182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1850,6 +1851,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 571080f5307535548924ad7fb5122e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  m_wIndex: 0
+  m_time: 0
 --- !u!114 &1710443399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1874,6 +1877,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ee863f5ab994d49b782088a6574288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
+  waveEnded: 0
+  nextDelay: 0
 --- !u!114 &1710443401
 MonoBehaviour:
   m_ObjectHideFlags: 0

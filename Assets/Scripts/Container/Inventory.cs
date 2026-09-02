@@ -43,4 +43,14 @@ public class Inventory : ReplayObjContainer<Item>
         Items.Add(item);
         return item;
     }
+    public override void GameUpdate()
+    {
+        if(GameManager.Instance.CurPlayer.IsDead) return;
+        base.GameUpdate();
+    }
+    public override void LateGameUpdate()
+    {
+        if(GameManager.Instance.CurPlayer.IsDead) return;
+        base.LateGameUpdate();
+    }
 }

@@ -7,6 +7,7 @@ public class MainUIManager : SingletonBehavior<MainUIManager>
     public void Awake()
     {
         m_GameOverUI.SetActive(false);
+        m_ESCManu.SetActive(false);
     }
     public void OpenGameOver()
     {

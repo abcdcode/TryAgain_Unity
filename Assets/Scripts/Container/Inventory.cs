@@ -29,7 +29,11 @@ public class Inventory : ReplayObjContainer<Item>
     {
         return ItemDB.Instance.ConvertId(id);
     }
-
+    public override void Delete(Item t)
+    {
+        base.Delete(t);
+        t.OnRelease();
+    }
     public override Item Create(string id, bool isIdCounting)
     {
         var data = ItemDB.Instance.GetData(id);
@@ -41,6 +45,7 @@ public class Inventory : ReplayObjContainer<Item>
             item.IndexId = GetNextId();
         }
         Items.Add(item);
+        item.OnEquip();
         return item;
     }
     public override void GameUpdate()

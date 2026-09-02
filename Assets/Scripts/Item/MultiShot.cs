@@ -39,7 +39,7 @@ public class MultiShot : CoolActiveItem
                 var b = p.CreateMainBullet();
                 b.InitPos(p.Position);
                 b.Angle = SeedManager.Instance.GetFloat(-10,10);
-                b.SetSize(new Vector2(60, 60));
+                b.SetSize(p.Stat.MainBulletSize());
                 b.damageInfo = new DamageInfo() { dmg = p.Stat.GetMainDmg(), faction = FactionEnum.Player };
                 m_remainShoot -= 1;
             }

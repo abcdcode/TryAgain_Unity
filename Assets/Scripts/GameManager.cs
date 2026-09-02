@@ -64,13 +64,10 @@ public class GameManager : SingletonBehavior<GameManager>
         if (inputinfo.OnESCDown)
         {
             State = State == GameManagerState.Pause ? GameManagerState.Playing : GameManagerState.Pause;
-            if(State == GameManagerState.Pause)
-            {
-                
-            }
+            MainUIManager.Instance.SetESCMenu(State == GameManagerState.Pause);
         }
         if (State == GameManagerState.Pause) return;
-        if (inputinfo.OnReplay)
+        if (inputinfo.OnReplay && CurPlayer.Stat.ReplayGauge > 0)
         {
             State = GameManagerState.Replay;
         }
@@ -145,6 +142,7 @@ public class GameManager : SingletonBehavior<GameManager>
     }
     void Load()
     {
+        
         if (CurFrame > StageManager.Instance.ReplayLimit)
         {
             CurFrame -= 1;
@@ -153,6 +151,7 @@ public class GameManager : SingletonBehavior<GameManager>
         {
             return;
         }
+        CurPlayer.Stat.ReplayGauge -= 1;
         var data = ReplayHamburger.Instance.Load(CurFrame);
         CurPlayer.Load(data);
         foreach (var c in m_ContainerList)

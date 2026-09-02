@@ -1,5 +1,8 @@
+
 using NUnit.Framework.Interfaces;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : ReplayMono, IHitable
 {
@@ -35,15 +38,21 @@ public class Player : ReplayMono, IHitable
     {
         base.Load(data);
         IsDead = data;
-        gameObject.SetActive(!IsDead);
+        base.m_rederer.enabled = !IsDead;
         CurActiveIndex = data;
+
+        m_replayImage.color = new Color(1,1,1,0.8f);
+        m_replayImage.fillAmount = Stat.ReplayGauge/Stat.GetMaxReplayGauge();
     }
     public override void GameUpdate()
     {
+        m_replayImage.color = new Color(1,1,1,0.1f);
+        m_replayImage.fillAmount = Stat.ReplayGauge/Stat.GetMaxReplayGauge();
+
         base.GameUpdate();
         if (IsDead)
         {
-            gameObject.SetActive(false);
+            base.m_rederer.enabled = false;
             return;
         }
         BulletContainer.HitCheckNew(this);
@@ -91,7 +100,7 @@ public class Player : ReplayMono, IHitable
         var b = CreateMainBullet();
         b.InitPos(this.Position);
         b.Angle = 0;
-        b.SetSize(new Vector2(60, 60));
+        b.SetSize(Stat.MainBulletSize());
         b.damageInfo = new DamageInfo() { dmg = Stat.GetMainDmg(), faction = FactionEnum.Player };
         m_CoolTimer.SetCool(AtkCool, Stat.GetAtkSpeed(), 0, true);
     }
@@ -102,6 +111,8 @@ public class Player : ReplayMono, IHitable
     public override void Delete()
     {
     }
+    [SerializeField]private Image m_replayImage;
+    
     public int CurActiveIndex{get;private set;}
     public PlayerStat Stat { get; private set; }
     private const int AtkCool = 1;

@@ -1,3 +1,4 @@
+using NUnit.Framework.Interfaces;
 using UnityEngine;
 
 public class Player : ReplayMono, IHitable
@@ -56,6 +57,33 @@ public class Player : ReplayMono, IHitable
         {
             Shoot();
         }
+        var isUseActive = input.OnActiveDown;
+        if(isUseActive)
+        {
+            UseActive();
+        }
+        var isChangeActive = input.OnChangeDown;
+        if(isChangeActive)
+        {
+            ChangeActive();
+        }
+    }
+    private void ChangeActive()
+    {
+        var it = Inventory.GetActives();
+        if(it.Count == 0)
+        {
+            CurActiveIndex = 0;
+            return;
+        }
+        CurActiveIndex += 1;
+        if(CurActiveIndex >= it.Count) CurActiveIndex = 0;
+    }
+    private void UseActive()
+    {
+        var it = Inventory.GetActives();
+        if(it.Count == 0) return;
+        it[CurActiveIndex].OnUse();
     }
     public void Shoot()
     {

@@ -168,6 +168,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Active",
+            "id": "44533892-b3b7-4418-bcb9-d42daa9fd833",
+            "actions": [
+                {
+                    "name": "Use",
+                    "type": "Button",
+                    "id": "bf279fef-aece-401a-bb75-66cdaaf34a01",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Change",
+                    "type": "Button",
+                    "id": "3cec4c26-ad57-4112-a22e-7489926af04d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a1d9097a-9558-4a1a-8a48-62c1093bdc76",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cb0f7619-6f95-4264-9701-b6aed13513c2",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Change",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

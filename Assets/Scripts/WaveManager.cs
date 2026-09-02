@@ -44,7 +44,7 @@ public class WaveManager : SingletonBehavior<WaveManager>, IReplayable
         m_time += Time.deltaTime;
         if(CheckWaveEnd())
         {
-            CurWave = null;
+            //CurWave = null;
             StageManager.Instance.EndWave();
         }
     }

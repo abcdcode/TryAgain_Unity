@@ -23,7 +23,8 @@ public abstract class CoolActiveItem : ActiveItem
         base.OnUse();
         if(cool <= 0)
         {
-            
+            Active();
+            cool = m_coolData.Cool;
         }
     }
     public virtual void Active()

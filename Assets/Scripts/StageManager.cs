@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class StageManager : SingletonBehavior<StageManager>, IReplayable
 {
@@ -8,6 +9,15 @@ public class StageManager : SingletonBehavior<StageManager>, IReplayable
     }
     public void GameUpdate()
     {
+        if(waveEnded)
+        {
+            nextDelay -= Time.deltaTime;
+            if(nextDelay <= 0)
+            {
+                RealEndWave();
+                waveEnded = false;
+            }
+        }
     }
 
     public void LateGameUpdate()
@@ -23,6 +33,11 @@ public class StageManager : SingletonBehavior<StageManager>, IReplayable
         StartWave();
     }
     public void EndWave()
+    {
+        waveEnded = true;
+        nextDelay = 2f;
+    }
+    private void RealEndWave()
     {
         foreach(var b in BulletContainer.Instance.GetList())
         {
@@ -47,12 +62,18 @@ public class StageManager : SingletonBehavior<StageManager>, IReplayable
     public void Load(SaveData data)
     {
         ReplayLimit = data;
+        waveEnded = data;
+        nextDelay = data;
     }
 
     public void Save(SaveData data)
     {
         data.Write(ReplayLimit);
+        data.Write(waveEnded);
+        data.Write(nextDelay);
     }
+    private bool waveEnded;
+    private float nextDelay;
     private List<Wave> m_Wave;
     public int ReplayLimit{get;set;}
     public StageState SState{get;set;}

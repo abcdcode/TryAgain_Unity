@@ -28,6 +28,7 @@ public class WaveManager : SingletonBehavior<WaveManager>, IReplayable
     public void GameUpdate()
     {
         if(CurWave == null) return;
+        if(m_wIndex >= CurWave.DataList.Count) return;
         for(int i = m_wIndex; i < CurWave.DataList.Count;i++)
         {
             var w = CurWave.DataList[i];

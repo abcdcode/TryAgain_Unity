@@ -88,12 +88,16 @@ public class Player : ReplayMono, IHitable
     public void Shoot()
     {
         if (!m_CoolTimer.IsCoolComp(AtkCool)) return;
-        var b = BulletContainer.Instance.Create(BulletDB.PlayerDefaultBullet, true);
+        var b = CreateMainBullet();
         b.InitPos(this.Position);
         b.Angle = 0;
         b.SetSize(new Vector2(60, 60));
         b.damageInfo = new DamageInfo() { dmg = Stat.GetMainDmg(), faction = FactionEnum.Player };
         m_CoolTimer.SetCool(AtkCool, Stat.GetAtkSpeed(), 0, true);
+    }
+    public Bullet CreateMainBullet()
+    {
+        return BulletContainer.Instance.Create(BulletDB.PlayerDefaultBullet, true);
     }
     public override void Delete()
     {

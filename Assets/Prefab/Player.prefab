@@ -284,6 +284,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   m_IndexId: 0
   m_ObjId: 
-  m_rederer: {fileID: 0}
+  m_rederer: {fileID: 4421021111694654388}
   m_animator: {fileID: 0}
   m_replayImage: {fileID: 3488746935352629031}

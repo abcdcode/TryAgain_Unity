@@ -19,4 +19,8 @@ public abstract class EnemyAIDataSO : ReplaySO<Enemy>
             }
         }
     }
+    public virtual EnemyAIState BuildAIState(Enemy enemy)
+    {
+        return new EnemyAIState();
+    }
 }

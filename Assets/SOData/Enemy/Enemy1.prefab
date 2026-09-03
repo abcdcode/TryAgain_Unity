@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 314645528501585956}
   - component: {fileID: -4349289966084504464}
   m_Layer: 0
-  m_Name: EnemyTest
+  m_Name: Enemy1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 5830694933855508796, guid: 5dc40225d705d32428e1e148a336cc90, type: 3}
+  m_Sprite: {fileID: -1677307333, guid: 5dc40225d705d32428e1e148a336cc90, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,10 +128,10 @@ MonoBehaviour:
     m_endTime: 2
     doAction:
     - time: 0
-      sprite: {fileID: 5830694933855508796, guid: 5dc40225d705d32428e1e148a336cc90, type: 3}
+      sprite: {fileID: -1677307333, guid: 5dc40225d705d32428e1e148a336cc90, type: 3}
       target: {fileID: 0}
     - time: 1
-      sprite: {fileID: 2257999382807605110, guid: 5dc40225d705d32428e1e148a336cc90, type: 3}
+      sprite: {fileID: -1513851889, guid: 5dc40225d705d32428e1e148a336cc90, type: 3}
       target: {fileID: 0}
   m_time: 0
   m_parent: {fileID: 0}

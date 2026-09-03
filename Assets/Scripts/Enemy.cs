@@ -13,6 +13,8 @@ public class Enemy : ReplayMono, IHitable
     {
         EnemyAIData = aiData;
         EnemyAIData.Init(this);
+        EnemyAIState = EnemyAIData.BuildAIState(this);
+        EnemyAIState.Init(this);
     }
     public override void Save(SaveData data)
     {
@@ -20,6 +22,7 @@ public class Enemy : ReplayMono, IHitable
         EnemyData.Save(data,this);
         data.Write(EnemyAIDB.Instance.ConvertId(EnemyAIData.m_Id));
         EnemyAIData.Save(data,this);
+        EnemyAIState.Save(data);
     }
     public override void Load(SaveData data)
     {
@@ -30,7 +33,13 @@ public class Enemy : ReplayMono, IHitable
         {
             EnemyAIData = EnemyAIDB.Instance.GetData(aid);
         }
+        if(EnemyAIState == null)
+        {
+            EnemyAIState = EnemyAIData.BuildAIState(this);
+            EnemyAIState.Init(this);
+        }
         EnemyAIData.Load(data,this);
+        EnemyAIState.Load(data);
     }
     public override void GameUpdate()
     {
@@ -74,4 +83,5 @@ public class Enemy : ReplayMono, IHitable
 
     public EnemyDataSO EnemyData;
     public EnemyAIDataSO EnemyAIData;
+    public EnemyAIState EnemyAIState;
 }

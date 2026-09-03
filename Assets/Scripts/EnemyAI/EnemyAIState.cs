@@ -1,4 +1,4 @@
-public class EnemyAIState : IReplayable
+public abstract class EnemyAIState : IReplayable
 {
     public virtual void Init(Enemy p)
     {
@@ -19,5 +19,9 @@ public class EnemyAIState : IReplayable
     public virtual void Save(SaveData data)
     {
     }
-    private Enemy owner;
+    protected virtual T AIData<T>() where T : EnemyAIDataSO
+    {
+        return owner.EnemyAIData as T;
+    }
+    protected Enemy owner;
 }

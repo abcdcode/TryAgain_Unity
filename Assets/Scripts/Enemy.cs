@@ -47,6 +47,7 @@ public class Enemy : ReplayMono, IHitable
         BulletContainer.HitCheckNew(this);
         EnemyData?.GameUpdate(this);
         EnemyAIData?.GameUpdate(this);
+        EnemyAIState?.GameUpdate();
         
     }
     public override void Delete()

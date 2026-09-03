@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class EnemyAI_MoveLeftAndAttack : EnemyAIDataSO
 {
-    [SerializeField] private float m_speed = 500;
-    [SerializeField] private float m_shotCool = 1;
+    [SerializeField] public float m_speed = 500;
+    [SerializeField] public float m_shotCool = 1;
+    /*
     public override void Init(Enemy enemy)
     {
         base.Init(enemy);
         enemy.Angle = 180;
         enemy.m_CoolTimer.SetCool(Shoot, m_shotCool, 0, true);
     }
+    
     public override void GameUpdate(Enemy obj)
     {
         base.GameUpdate(obj);
@@ -27,6 +29,12 @@ public class EnemyAI_MoveLeftAndAttack : EnemyAIDataSO
             b.SetSize(new Vector2(30, 30));
             obj.m_CoolTimer.SetCool(Shoot, m_shotCool, 0, true);
         }
+        
+    }
+    */
+    public override EnemyAIState BuildAIState(Enemy enemy)
+    {
+        return new AIState_MoveAndAttack();
     }
     private const int Shoot = 10;
 }

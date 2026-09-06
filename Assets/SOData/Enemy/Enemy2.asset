@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da0d4a30c2f1e0a47a42f747424a13dd, type: 3}
-  m_Name: Enemy1
+  m_Name: Enemy2
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDataSO
   m_Id: Enemy1
-  Hp: 60
+  Hp: 100
   m_Prefab: {fileID: 7700300238775290631, guid: 4f0129cd5ee56b04b988bb62f09da00d, type: 3}
   m_Size: 110

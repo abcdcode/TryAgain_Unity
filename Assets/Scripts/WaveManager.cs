@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -107,11 +108,13 @@ public class WaveData
         var e = EnemyContainer.Instance.Create(eid,true);
         e.Position = SummonPos;
         e.AIInit(ai);
+        if(AfterAction != null) AfterAction(e);
     }
     public ushort SummonEnemy;
     public Vector2 SummonPos;
     public ushort EnemyAI;
     public float Time;
+    public Action<Enemy> AfterAction;
 }
 
 
@@ -122,7 +125,8 @@ public static class WavePreset
         List<Wave> waves = new List<Wave>
         {
             Stage1_1Wave(),
-            Stage1_2Wave()
+            Stage1_2Wave(),
+            Stage1_3Wave()
         };
         return waves;
     }
@@ -140,16 +144,28 @@ public static class WavePreset
     private static Wave Stage1_2Wave()
     {
         Wave result = new Wave();
-        for(int i = 0; i < 7; i++)
+        for(int i = 0; i < 4; i++)
         {
             var vec = new Vector2(1200,SeedManager.Instance.GetFloat(-500,500));
             WaveData data = new(EnemyDB.TestEnemy,vec,EnemyAIDB.MoveAttack1,i*0.6f);
             result.DataList.Add(data);
         }
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < 7; i++)
         {
             var vec = new Vector2(1200,SeedManager.Instance.GetFloat(-500,500));
             WaveData data = new(EnemyDB.TestEnemy,vec,EnemyAIDB.Kamikaze,i*0.3f);
+            result.DataList.Add(data);
+        }
+        return result;
+    }
+    private static Wave Stage1_3Wave()
+    {
+        Wave result = new Wave();
+        for(int i = 0; i < 6; i++)
+        {
+            var vec = new Vector2(1200,SeedManager.Instance.GetFloat(-500,500));
+            WaveData data = new("Enemy1",vec,"StayAttack1",i*1f);
+            data.AfterAction = (e) => e.EnemyAIState.AIInit(new Vector2(SeedManager.Instance.GetFloat(700,900),SeedManager.Instance.GetFloat(-500,500)));
             result.DataList.Add(data);
         }
         return result;

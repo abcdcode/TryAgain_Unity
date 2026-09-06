@@ -4,6 +4,10 @@ public abstract class EnemyAIState : IReplayable
     {
         owner = p;
     }
+    public virtual void AIInit(params object[] parmater)
+    {
+        
+    }
     public virtual void GameUpdate()
     {
     }

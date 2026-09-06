@@ -1710,6 +1710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDB
   items:
   - {fileID: 11400000, guid: f3f72c56e6c82f340b743095ae61f681, type: 2}
+  - {fileID: 11400000, guid: cdc9f194961b0404ea5b11741be51ae4, type: 2}
 --- !u!114 &1368819180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1725,6 +1726,7 @@ MonoBehaviour:
   items:
   - {fileID: 11400000, guid: f8cab9a0c5ad42e4d99a124cf9fd2cc4, type: 2}
   - {fileID: 11400000, guid: 8257178e0a5be9945bd6f34e51e728ba, type: 2}
+  - {fileID: 11400000, guid: 3c8384da34479f24cafdcb39f133ef3b, type: 2}
 --- !u!114 &1368819181
 MonoBehaviour:
   m_ObjectHideFlags: 0

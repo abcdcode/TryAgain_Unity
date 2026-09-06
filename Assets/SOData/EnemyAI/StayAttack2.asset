@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b66fb94d88000d84090659757b7106b4, type: 3}
-  m_Name: MoveAttack1
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI_MoveLeftAndAttack
-  m_Id: MoveAttack1
+  m_Script: {fileID: 11500000, guid: 8c33a96c8cd20f24287d12d4a5cb1c14, type: 3}
+  m_Name: StayAttack2
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI_StayAndAttack
+  m_Id: StayAttack1
   leftOut: 1
-  m_speed: 400
-  m_shotCool: 1
+  m_speed: 300
+  m_shotCool: 1.5

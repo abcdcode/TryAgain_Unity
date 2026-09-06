@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class EnemyAI_MoveLeftAndAttack : EnemyAIDataSO
+public class EnemyAI_MoveLeftAndAttack : EnemyAI_DefaultMoveShot
 {
-    [SerializeField] public float m_speed = 500;
-    [SerializeField] public float m_shotCool = 1;
     /*
     public override void Init(Enemy enemy)
     {

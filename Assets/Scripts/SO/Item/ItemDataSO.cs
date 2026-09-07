@@ -23,6 +23,14 @@ public abstract class ItemDataSO : ReplaySO<Item>
         var t = Type.GetType(script);
         return (Item)Activator.CreateInstance(t);
     }
+    public virtual bool CheckCondition()
+    {
+        if(Inventory.Instance.GetList().Find(x => x.Data == this) != null)
+        {
+            return false;
+        }
+        return true;
+    }
 }
 public enum ItemGrade
 {

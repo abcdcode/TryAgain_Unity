@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI_StayAndAttack
   m_Id: StayAttack1
   leftOut: 1
+  m_attackInfo: {fileID: 11400000, guid: c8da0648004dc7b489cc124271352ad4, type: 2}
   m_speed: 300
   m_shotCool: 1.5

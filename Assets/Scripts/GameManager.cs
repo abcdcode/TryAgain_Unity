@@ -31,6 +31,12 @@ public class GameManager : SingletonBehavior<GameManager>
         pDeadTime = 2;
         //Inventory.Instance.Create("MultiShot",true);
         StageManager.Instance.StageInit(1);
+        if(IsContinue)
+        {
+            ReplayHamburger.Instance.LoadInSaveFile();
+            IsContinue = false;
+            StageManager.Instance.StartWave();
+        }
     }
     /// <summary>
     /// 인풋 받아서 플레이 상태 결정하는 곳
@@ -129,7 +135,6 @@ public class GameManager : SingletonBehavior<GameManager>
     }
     void Save()
     {
-
         SaveData data = new SaveData();
         CurPlayer.Save(data);
         foreach (var c in m_ContainerList)
@@ -138,7 +143,10 @@ public class GameManager : SingletonBehavior<GameManager>
         }
         data.Save();
         ReplayHamburger.Instance.Save(CurFrame, data);
-
+        if(CurFrame == StageManager.Instance.ReplayLimit)
+        {
+            ReplayHamburger.Instance.WriteAsSaveFile(CurFrame);
+        }
     }
     void Load()
     {
@@ -153,12 +161,17 @@ public class GameManager : SingletonBehavior<GameManager>
         }
         CurPlayer.Stat.ReplayGauge -= 1;
         var data = ReplayHamburger.Instance.Load(CurFrame);
+        FileLoad(data,CurFrame);
+        data.Dispose();
+    }
+    public void FileLoad(SaveData data,int frame)
+    {
+        CurFrame = frame;
         CurPlayer.Load(data);
         foreach (var c in m_ContainerList)
         {
             c.Load(data);
         }
-        data.Dispose();
     }
     public GameManagerState State { get; set; }
     public Player CurPlayer { get; private set; }
@@ -169,6 +182,7 @@ public class GameManager : SingletonBehavior<GameManager>
     [SerializeField] public bool IsDebug;
     public const int ScreenX = 1920;
     public const int ScreenY = 1080;
+    public static bool IsContinue;
 }
 public enum GameManagerState
 {

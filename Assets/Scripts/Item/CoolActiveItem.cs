@@ -18,6 +18,10 @@ public abstract class CoolActiveItem : ActiveItem
     {
         return cool/m_coolData.Cool;
     }
+    public virtual void ResetCool()
+    {
+        cool = 0;
+    }
     public override void OnUse()
     {
         base.OnUse();

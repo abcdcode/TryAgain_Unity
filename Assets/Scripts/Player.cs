@@ -56,6 +56,7 @@ public class Player : ReplayMono, IHitable
             return;
         }
         BulletContainer.HitCheckNew(this);
+        EnemyContainer.PlayerHitCheck(this);
         var input = InputManager.Instance.InputInfo;
         //방향키 인풋
         var MoveDir = input.MoveDir;

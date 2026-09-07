@@ -140,11 +140,19 @@ public static class CalcUtils
     }
     public static void MoveForward(this GameMono obj, float value)
     {
-        float radian = obj.Angle * Mathf.Deg2Rad;
-        Vector2 direction = new Vector2(
+        Vector2 direction = LookDir(obj);
+        obj.Position += direction.normalized * value * Time.deltaTime;
+    }
+    public static Vector2 LookDir(this GameMono obj)
+    {
+        return LookDir(obj.Angle);
+    }
+    public static Vector2 LookDir(float angle)
+    {
+        float radian = angle * Mathf.Deg2Rad;
+        return new Vector2(
         Mathf.Cos(radian),
         Mathf.Sin(radian)
     );
-        obj.Position += direction.normalized * value * Time.deltaTime;
     }
 }

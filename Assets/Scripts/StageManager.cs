@@ -44,6 +44,11 @@ public class StageManager : SingletonBehavior<StageManager>, IReplayable
             b.Delete();
         }
         SState = StageState.Reward;
+        if(CurWaveNum+1 >= m_Wave.Count)
+        {
+            MainUIManager.Instance.OpenGameClear();
+            return;
+        }
         var reward = ItemDB.GetReward(3,ItemGrade.Normal);
         UIRewardList.Instance.SetReward(reward);
         ReplayLimit = GameManager.Instance.CurFrame+2;

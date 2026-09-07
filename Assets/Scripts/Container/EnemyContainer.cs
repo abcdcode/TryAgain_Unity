@@ -1,5 +1,17 @@
 public class EnemyContainer : ReplayObjContainer<Enemy>
 {
+    public static void PlayerHitCheck(IHitable a)
+    {
+        if(a.Obj == null) return;
+        
+        foreach(var b in EnemyContainer.Instance.GetList())
+        {
+            if(CalcUtils.SegmentCircle(b.Position,a.Obj.Position,(a.Obj.GetSize().x+b.GetSize().x)/2))
+            {
+                a.TakeDamage(new DamageInfo(){dmg = 1, faction = FactionEnum.Enemy});
+            }
+        }
+    }
     public override ushort ConvertId(string id)
     {
         return EnemyDB.Instance.ConvertId(id);

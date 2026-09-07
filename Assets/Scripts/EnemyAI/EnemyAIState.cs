@@ -8,6 +8,10 @@ public abstract class EnemyAIState : IReplayable
     {
         
     }
+    public virtual void OnDead()
+    {
+        
+    }
     public virtual void GameUpdate()
     {
     }

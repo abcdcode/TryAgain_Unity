@@ -126,7 +126,8 @@ public static class WavePreset
         {
             Stage1_1Wave(),
             Stage1_2Wave(),
-            Stage1_3Wave()
+            Stage1_3Wave(),
+            Stage1_Boss()
         };
         return waves;
     }
@@ -168,6 +169,13 @@ public static class WavePreset
             data.AfterAction = (e) => e.EnemyAIState.AIInit(new Vector2(SeedManager.Instance.GetFloat(700,900),SeedManager.Instance.GetFloat(-500,500)));
             result.DataList.Add(data);
         }
+        return result;
+    }
+    private static Wave Stage1_Boss()
+    {
+        Wave result = new Wave();
+        WaveData data = new("Boss1",new Vector2(1600,0),"Boss1",0);
+        result.DataList.Add(data);
         return result;
     }
 }

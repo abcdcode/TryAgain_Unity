@@ -3,15 +3,7 @@ using UnityEngine;
 
 public class Enemy : ReplayMono, IHitable
 {
-    public static Bullet ShootEnemyDefaultBullet(Vector2 pos, float angle)
-    {
-        var b = BulletContainer.Instance.Create(BulletDB.EnemyTestBullet, true);
-                b.InitPos(pos);
-                b.Angle = angle;
-                b.damageInfo = new DamageInfo(){dmg = 1, faction = FactionEnum.Enemy};
-                b.SetSize(new Vector2(30, 30));
-                return b;
-    }
+    
     public void Init(EnemyDataSO data)
     {
         EnemyData = data;
@@ -54,7 +46,15 @@ public class Enemy : ReplayMono, IHitable
     public override void GameUpdate()
     {
         base.GameUpdate();
-        BulletContainer.HitCheckNew(this);
+        if(HitSize < 200)
+        {
+            BulletContainer.HitCheckNew(this);
+        }
+        else
+        {
+            BulletContainer.HitCheck(this);
+        }
+        
         EnemyData?.GameUpdate(this);
         EnemyAIData?.GameUpdate(this);
         EnemyAIState?.GameUpdate();
@@ -79,9 +79,13 @@ public class Enemy : ReplayMono, IHitable
         HP -= dmg.dmg;
         if(HP <= 0)
         {
-            var e = EffectContainer.Instance.Create("EnemyDead",true);
-            e.SetSize(this.GetSize());
-            e.Position = this.Position;
+            EnemyAIState.OnDead();
+            if(m_DeadEffectName != string.Empty)
+            {
+                var e = EffectContainer.Instance.Create(m_DeadEffectName,true);
+                e.SetSize(this.GetSize());
+                e.Position = this.Position;
+            }
             Delete();
         }
     }
@@ -95,4 +99,5 @@ public class Enemy : ReplayMono, IHitable
     public EnemyDataSO EnemyData;
     public EnemyAIDataSO EnemyAIData;
     public EnemyAIState EnemyAIState;
+    [SerializeField]private string m_DeadEffectName = "EnemyDead";
 }

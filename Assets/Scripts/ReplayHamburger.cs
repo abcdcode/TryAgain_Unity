@@ -42,7 +42,7 @@ public class ReplayHamburger : Singleton<ReplayHamburger>
         GameManager.Instance.FileLoad(data,rs.Frame);
 
         GameManager.Instance.CurPlayer.Stat.ReplayGauge = rs.ReplayGauge;
-
+        EnemyContainer.Instance.Clear();
         return true;
     }
     private Dictionary<int,SaveData> saveDic = new Dictionary<int,SaveData>();

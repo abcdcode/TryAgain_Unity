@@ -11,7 +11,8 @@ public class StageManager : SingletonBehavior<StageManager>, IReplayable
     {
         if(waveEnded)
         {
-            nextDelay -= Time.deltaTime;
+            if(!GameManager.Instance.CurPlayer.IsDead)nextDelay -= Time.deltaTime;
+            
             if(nextDelay <= 0)
             {
                 RealEndWave();

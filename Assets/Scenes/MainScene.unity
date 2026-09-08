@@ -2395,7 +2395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   m_playerPrefab: {fileID: 3716359474922246344, guid: 5047a34e4ddab244c83c699245036f5f, type: 3}
   m_DebugText: {fileID: 1058458395}
-  IsDebug: 1
+  IsDebug: 0
 --- !u!4 &1710443393
 Transform:
   m_ObjectHideFlags: 0

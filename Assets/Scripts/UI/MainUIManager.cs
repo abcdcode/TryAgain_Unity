@@ -13,10 +13,12 @@ public class MainUIManager : SingletonBehavior<MainUIManager>
     }
     public void OpenGameOver()
     {
+        GlobalManager.Instance.RemoveSave();
         m_GameOverUI.SetActive(true);
     }
     public void OpenGameClear()
     {
+        GlobalManager.Instance.RemoveSave();
         m_GameClearUI.SetActive(true);
     }
     public void ClickGoToTitle()

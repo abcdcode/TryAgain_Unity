@@ -20,6 +20,7 @@ public class AIState_Boss1Shield : EnemyAIState
         var boss = EnemyContainer.Instance.GetList().Find(x => x.IndexId == bossid);
         if(boss == null)
         {
+            owner.Delete();
             return;
         }
         owner.Angle = m_curAngle + 90;

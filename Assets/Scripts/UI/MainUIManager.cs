@@ -55,7 +55,7 @@ public class MainUIManager : SingletonBehavior<MainUIManager>
     {
         m_bossid = id;
     }
-    [SerializeField]private int m_bossid;
+    [SerializeField]private int m_bossid = -1;
     [SerializeField]private Image m_BossHpBar;
     [SerializeField]private GameObject m_ESCManu;
     [SerializeField]private GameObject m_GameOverUI;

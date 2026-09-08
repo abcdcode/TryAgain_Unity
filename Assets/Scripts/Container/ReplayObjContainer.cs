@@ -86,7 +86,8 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
     public virtual void Load(SaveData data)
     {
         int count = data;
-        List<T> list = GetList();
+        var list = GetList().ToArray();
+
         int arrayIndex = 0;
         for (int i = 0; i < count; i++)
         {
@@ -104,10 +105,10 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
                 }
                 if (itIndex == indexId)
                 {
+                    list[arrayIndex] = default(T);
                     arrayIndex += 1;
                     it.Load(data);
                     isLoad = true;
-                    list.Remove(it);
                     break;
                 }
                 if (itIndex > indexId)
@@ -126,7 +127,7 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
         }
         foreach (var i in list)
         {
-            i.Delete();
+            i?.Delete();
         }
     }
     

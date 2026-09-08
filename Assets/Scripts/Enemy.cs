@@ -21,6 +21,7 @@ public class Enemy : ReplayMono, IHitable
     public override void Save(SaveData data)
     {
         base.Save(data);
+        data.Write(HP);
         EnemyData.Save(data,this);
         data.Write(EnemyAIDB.Instance.ConvertId(EnemyAIData.m_Id));
         EnemyAIData.Save(data,this);
@@ -29,6 +30,7 @@ public class Enemy : ReplayMono, IHitable
     public override void Load(SaveData data)
     {
         base.Load(data);
+        HP = data;
         EnemyData.Load(data,this);
         ushort aid = data;
         if(EnemyAIData == null || EnemyAIDB.Instance.ConvertId(EnemyAIData.m_Id) != aid)

@@ -23,7 +23,7 @@ public class AIState_Boss1Shield : EnemyAIState
             return;
         }
         owner.Angle = m_curAngle + 90;
-        owner.Position = boss.Position + CalcUtils.LookDir(m_curAngle).normalized * (boss.GetSize().x/2+owner.GetSize().x/2);
+        owner.Position = boss.Position + CalcUtils.LookDir(m_curAngle).normalized * (boss.GetSize().x/2+owner.GetSize().x);
     }
     public override void Save(SaveData data)
     {

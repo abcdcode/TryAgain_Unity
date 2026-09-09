@@ -30,59 +30,6 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
         }
         return -1;
     }
-
-    /*
-    public virtual void Save(SaveData data)
-    {
-        data.Write(Items.Count);
-        for(int i=0 ; i < Items.Count; i++)
-        {
-            var it = Items[i];
-            data.Write(it.IndexId);
-            data.Write(it.ObjId);
-            it.Save(data);
-        }
-    }
-    */
-    /*
-    public virtual void Load(SaveData data)
-    {
-        int count = data;
-        List<int> list = new();
-        for (int i = 0; i < count; i++)
-        {
-            int indexId = data;
-            ushort objId = data;
-            T item;
-            item = Items.Find(x => x.IndexId == indexId);
-            if (item != null)
-            {
-                item.Load(data);
-            }
-            else
-            {
-                item = Create(ConvertId(objId), false);
-                item.IndexId = indexId;
-                item.ObjId = ConvertId(objId);
-                item.Load(data);
-            }
-            list.Add(indexId);
-        }
-        var d = new List<T>();
-        foreach (var i in Items)
-        {
-            if (!list.Contains(i.IndexId))
-            {
-                d.Add(i);
-            }
-        }
-        foreach (var i in d)
-        {
-            i.Delete();
-        }
-    }
-    */
-    
     public virtual void Load(SaveData data)
     {
         int count = data;
@@ -130,7 +77,6 @@ public abstract class ReplayObjContainer<T> : SingletonBehavior<ReplayObjContain
             i?.Delete();
         }
     }
-    
     public virtual void Add(T t)
     {
         Items.Add(t);

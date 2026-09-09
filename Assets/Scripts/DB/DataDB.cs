@@ -45,6 +45,5 @@ public abstract class DataDB<T> : SingletonBehavior<DataDB<T>> where T : SOData
         return items.ToList();
     }
     protected BiDictionary<string, ushort> idDic;
-    //protected Dictionary<ushort, T> itemDic;
     [SerializeField] protected List<T> items;
 }

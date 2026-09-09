@@ -110,6 +110,7 @@ public class GameManager : SingletonBehavior<GameManager>
     }
     private long tick1;
     private long tick2;
+    
     void GameUpdate()
     {
         Stopwatch sw = Stopwatch.StartNew();
@@ -133,6 +134,25 @@ public class GameManager : SingletonBehavior<GameManager>
         }
         CurFrame += 1;
     }
+    
+    /*
+    void GameUpdate()
+    {
+        CurPlayer.GameUpdate();
+
+        foreach (var c in m_ContainerList)
+        {
+            c.GameUpdate();
+        }
+        Save();
+        CurPlayer.LateGameUpdate();
+        foreach (var c in m_ContainerList)
+        {
+            c.LateGameUpdate();
+        }
+        CurFrame += 1;
+    }
+    */
     void Save()
     {
         SaveData data = new SaveData();

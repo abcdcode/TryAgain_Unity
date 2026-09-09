@@ -44,6 +44,7 @@ public class AIState_Boss1 : EnemyAIState
     public override void OnDead()
     {
         base.OnDead();
+        EnemyContainer.Instance.Clear();
     }
     public Enemy SummonBirdStrike()
     {
